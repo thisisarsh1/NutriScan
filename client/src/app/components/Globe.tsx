@@ -7,7 +7,7 @@ const World = dynamic(() => import("./ui/globe").then((m) => m.World), {
   ssr: false,
 });
 
-export function Hero2() {
+export function Globe() {
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
@@ -395,7 +395,7 @@ export function Hero2() {
   ];
 
   return (
-    <div className="flex flex-row items-center justify-center py-20 h-screen md:h-auto dark:bg-black bg-white relative w-full">
+    <div className="flex flex-row items-center justify-center py-20 h-screen md:h-auto  elative w-full">
       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
         <motion.div
           initial={{
@@ -411,13 +411,11 @@ export function Hero2() {
           }}
           className="div"
         >
-          <h2 className="text-center text-xl md:text-4xl font-bold text-black dark:text-white">
-            We sell soap worldwide
-          </h2>
+         
           
         </motion.div>
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
-        <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
+        <div className="absolute w-full -bottom-20 h-72 md:h-full z-10 ">
           <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
       </div>

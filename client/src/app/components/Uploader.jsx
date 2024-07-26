@@ -61,7 +61,7 @@ export default function FileUploadComponent() {
     };
 
     return (
-        <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-transparent w-[50%] h-[40%] mt-[5%] mx-auto">
+        <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-transparent w-[50%] h-[40%]  mx-auto">
             <div className="flex justify-between mb-4">
                 <button 
                     className="px-4 py-2 text-white  rounded flex-col text-center hover:text-slate-400"
