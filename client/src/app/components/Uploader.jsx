@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { SquareDashedMousePointer, Upload, CircleX, Image as LucideImage } from 'lucide-react';
 import Image from 'next/image'; // Assuming you're using Next.js for Image component
+import { Barcode_input } from './Barcode_input';
 
 export default function FileUploadComponent() {
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -65,7 +66,7 @@ export default function FileUploadComponent() {
     };
 
     return (
-        <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-transparent w-[50%] h-[40%] mx-auto">
+        <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-transparent w-[50%] h-[50%] mx-auto">
             <div className="flex justify-between mb-4">
                 <button 
                     className="px-4 py-2 text-white rounded flex-col text-center hover:text-slate-400"
@@ -110,7 +111,9 @@ export default function FileUploadComponent() {
                                 height={100} 
                                 className="mb-4" 
                             />
-                            <p className="text-gray-500">Drag and drop files here or click browse</p>
+                            <p className="text-gray-500">Drag and drop files here or click browse </p>
+                            <p className="text-gray-500">Or Just enter th ebarcode number </p>
+
                         </div>
                     </div>
                 ) : (
@@ -121,7 +124,7 @@ export default function FileUploadComponent() {
                     </ul>
                 )}
             </div>
-
+                            <Barcode_input></Barcode_input>
             {uploadProgress > 0 && (
                 <div className="mt-4">
                     <div className="h-2 bg-gray-200 rounded-full">

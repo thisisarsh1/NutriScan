@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import { Globe } from "./components/Globe";
 import { Input } from "./components/Input";
+import { Movingcards } from "./components/MovingCards";
 
 
 export default function Home() {
@@ -15,6 +16,9 @@ export default function Home() {
         <div className="flex-1">
           <Globe />
         </div>
+      </div>
+      <div>
+        <Movingcards></Movingcards>
       </div>
       <div className="w-full">
         
