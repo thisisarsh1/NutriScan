@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 const svgToDataUri = require("mini-svg-data-uri");
  
@@ -10,11 +11,25 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   darkMode:"class",
   theme: {
-    extend: {animation: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
       
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       
@@ -23,7 +38,16 @@ const config: Config = {
     boxShadow: {
       input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
     },
-    keyframes: {scroll: {
+    keyframes: {
+      "accordion-down": {
+        from: { height: "0" },
+        to: { height: "var(--radix-accordion-content-height)" },
+      },
+      "accordion-up": {
+        from: { height: "var(--radix-accordion-content-height)" },
+        to: { height: "0" },
+      },
+      scroll: {
       to: {
         transform: "translate(calc(-50% - 0.5rem))",
       },
@@ -67,8 +91,8 @@ const config: Config = {
       },
       { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
     );
-  },],
-};
+  },require("tailwindcss-animate")],
+}satisfies Config
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(
