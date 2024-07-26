@@ -7,7 +7,6 @@ export default function FileUploadComponent() {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
     const inputRef = useRef();
-    const [image, setImage] = useState(null);
 
     const handleFilesSelect = (files) => {
         setSelectedFiles(files);
@@ -24,26 +23,30 @@ export default function FileUploadComponent() {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        
+
         if (selectedFiles.length === 0) {
             console.error('No files selected');
             return;
         }
-    
-   
 
         const formData = new FormData();
-        selectedFiles.forEach(file => formData.append('image', file)); // Append each file
-        console.log("formdata",formData)
+        selectedFiles.forEach(file => formData.append('scan_image', file));
+
+        // Log the formData to verify it's populated correctly
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+
         try {
             const response = await fetch('http://127.0.0.1:8000/api/foodscan/images/', {
                 method: 'POST',
                 body: formData,
+                // Optional: Track progress if needed
+                // headers: { 'Content-Type': 'multipart/form-data' }, // Not required for FormData
             });
-    
+
             if (response.ok) {
                 console.log('Image sent');
-                // Reset progress and selected files after successful upload
                 setUploadProgress(0);
                 setSelectedFiles([]);
             } else {
@@ -55,30 +58,31 @@ export default function FileUploadComponent() {
             console.error('Network error:', error);
         }
     };
+
     const handleCancel = () => {
         setSelectedFiles([]);
         setUploadProgress(0);
     };
 
     return (
-        <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-transparent w-[50%] h-[40%]  mx-auto">
+        <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-transparent w-[50%] h-[40%] mx-auto">
             <div className="flex justify-between mb-4">
                 <button 
-                    className="px-4 py-2 text-white  rounded flex-col text-center hover:text-slate-400"
+                    className="px-4 py-2 text-white rounded flex-col text-center hover:text-slate-400"
                     onClick={() => inputRef.current.click()}
                 >
                     <SquareDashedMousePointer />
                     <div>Browse</div>
                 </button>
                 <button 
-                    className="px-4 py-2 text-white  rounded flex-col text-center hover:text-slate-400"
+                    className="px-4 py-2 text-white rounded flex-col text-center hover:text-slate-400"
                     onClick={handleUpload}
                 >
                     <Upload />
                     <div>Upload</div>
                 </button>
                 <button 
-                    className="px-4 py-2 text-white  rounded flex-col text-center hover:text-slate-400"
+                    className="px-4 py-2 text-white rounded flex-col text-center hover:text-slate-400"
                     onClick={handleCancel}
                 >
                     <CircleX />
