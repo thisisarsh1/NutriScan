@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-      <Navbar className="top-10" />
+      <Navbar className="top-9" />
         {children}</body>
     </html>
   );
