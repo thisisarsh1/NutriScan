@@ -1,10 +1,34 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
+from .managers import CustomUserManager
 # Create your models here.
-class FoodTesting_Scan(models.Model):
+
+
+
+class FoodTesting_Scan_Image(models.Model):
     testing_id = models.AutoField(primary_key=True)
     scan_image = models.ImageField(upload_to='foodscan/')
 
 
     def __str__(self) :
         return self.testing_id
+    
+
+
+class FoodTesting_Scan_text(models.Model):
+    testing_id = models.AutoField(primary_key=True)
+    scan_text = models.TextField()
+
+class User(AbstractUser):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254, unique=True)
+    password = models.CharField(max_length=500)
+    username = None
+    otp = models.CharField(max_length=6, blank=True, null=True)
+    otp_expiration = models.DateTimeField(blank=True, null=True)
+    is_active = models.BooleanField(default=False)  # Make user inactive by default
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
