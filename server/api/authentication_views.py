@@ -12,7 +12,11 @@ from .authenticationserializer import UserSerializer,PasswordResetRequestSeriali
 from django.core.mail import send_mail
 from django.utils.crypto import get_random_string
 from django.core.cache import cache
+import ssl
+import requests
 
+# Disable SSL verification
+ssl._create_default_https_context = ssl._create_unverified_context
 class RegisterView(APIView):
     @csrf_exempt
     def post(self, request):
