@@ -2,6 +2,7 @@ import Hero from "./components/Hero";
 import { Globe } from "./components/Globe";
 import { Input } from "./components/Input";
 import { Movingcards } from "./components/MovingCards";
+import Footer from "./components/Footer";
 
 
 export default function Home() {
@@ -20,9 +21,7 @@ export default function Home() {
       <div>
         <Movingcards></Movingcards>
       </div>
-      <div className="w-full">
-        
-      </div>
+      <Footer></Footer>
     </div>
   );
 }
