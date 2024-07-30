@@ -5,17 +5,22 @@ import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
 
 export function Movingcards() {
   return (
-    <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
-      <div className=" text-4xl sm:text-6xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-8">Testimonials</div>
-      <br></br>
-      <br></br>
+    <div className="h-[40rem] rounded-md flex flex-col items-center justify-center relative overflow-hidden antialiased  dark:bg-black dark:bg-grid-white/[0.05]">
+  <div className="text-6xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-8">
+    Testimonials
+  </div>
+  
+  {/* Ensure spacing between title and cards */}
+  <div className="mt-8 flex flex-col items-center sm:flex-row sm:items-start w-full">
+    <InfiniteMovingCards
+      items={testimonials}
+      direction="right"
+      speed="slow"
+      className="w-full sm:w-[calc(100%-2rem)]" // Adjust width for responsiveness
+    />
+  </div>
+</div>
 
-      <InfiniteMovingCards
-        items={testimonials}
-        direction="right"
-        speed="slow"
-      />
-    </div>
   );
 }
 

@@ -20,12 +20,12 @@ function Footer({ className }: { className?: string }) {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Quick Links</h4>
             <ul className="space-y-2">
-              <li><LinkPreview url="/nutrition-info" className="hover:text-white">Nutrition Info</LinkPreview></li>
-              <li><LinkPreview url="/allergen-alerts" className="hover:text-white">Allergen Alerts</LinkPreview></li>
-              <li><LinkPreview url="/dietary-suitability" className="hover:text-white">Dietary Suitability</LinkPreview></li>
-              <li><LinkPreview url="/product-scanner" className="hover:text-white">Product Scanner</LinkPreview></li>
-              <li><LinkPreview url="/blog" className="hover:text-white">Blog</LinkPreview></li>
-              <li><LinkPreview url="/recipes" className="hover:text-white">Recipes</LinkPreview></li>
+              <li><LinkPreview url="https://facebook.com" className="hover:text-white">Nutrition Info</LinkPreview></li>
+              <li><LinkPreview url="https://facebook.com" className="hover:text-white">Allergen Alerts</LinkPreview></li>
+              <li><LinkPreview url="https://facebook.com" className="hover:text-white">Dietary Suitability</LinkPreview></li>
+              <li><LinkPreview url="https://facebook.com" className="hover:text-white">Product Scanner</LinkPreview></li>
+              <li><LinkPreview url="https://facebook.com" className="hover:text-white">Blog</LinkPreview></li>
+              <li><LinkPreview url="https://facebook.com" className="hover:text-white">Recipes</LinkPreview></li>
             </ul>
           </div>
 

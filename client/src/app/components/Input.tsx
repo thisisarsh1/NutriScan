@@ -19,7 +19,7 @@ export function Input() {
     console.log("submitted");
   };
   return (
-    <div className="h-screen flex flex-col justify-center  items-center px-4">
+    <div className="sm:h-screen flex flex-col justify-center  items-center p-4 mt-5">
       <h2 className="mb-10 sm:mb-10  text-center sm:text-2xl z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600">
         Ask NutriScan Anything about the scanned Product
       </h2>
