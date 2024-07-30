@@ -395,8 +395,8 @@ export function Globe() {
   ];
 
   return (
-    <div className="flex flex-row items-center justify-center py-10 h-[40vh] md:h-auto  elative w-full">
-      <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
+    <div className="flex flex-row items-center justify-center py-5 h-[40vh] md:h-auto  elative w-full">
+      <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] ">
         <motion.div
           initial={{
             opacity: 0,
