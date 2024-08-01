@@ -34,3 +34,5 @@ class BotResponseView(APIView):
         # Serialize the bot response
         serializer = BotResponseSerializer(bot_response)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+
