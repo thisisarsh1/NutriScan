@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'testimonials',
     'user_profile',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'disease_algorithm',
 ]
 
 MIDDLEWARE = [
