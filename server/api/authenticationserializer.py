@@ -6,14 +6,18 @@ import datetime
 from django.utils import timezone
 from bot.models import BotResponse
 from bot.serializers import BotResponseSerializer
+from user_profile.serializers import User_profile_serializer
+from testimonials.serializers import testimonial_serializer
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
     otp = serializers.CharField(write_only=True, required=False)
     botresponse = BotResponseSerializer(many = True, read_only = True)
+    user_profile = User_profile_serializer(many = True,read_only = True )
+    review = testimonial_serializer(many= True, read_only = True)
     class Meta:
         model = User
-        fields = ['name', 'email', 'password', 'confirm_password', 'otp','botresponse']
+        fields = ['name', 'email', 'password', 'confirm_password', 'otp','botresponse','user_profile','review']
         extra_kwargs = {
             'password': {'write_only': True},
         }
