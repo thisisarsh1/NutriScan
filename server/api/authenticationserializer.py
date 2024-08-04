@@ -8,6 +8,7 @@ from bot.models import BotResponse
 from bot.serializers import BotResponseSerializer
 from user_profile.serializers import User_profile_serializer
 from testimonials.serializers import testimonial_serializer
+from disease_algorithm.serializers import diabetes_barcode_serializer
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
@@ -15,9 +16,20 @@ class UserSerializer(serializers.ModelSerializer):
     botresponse = BotResponseSerializer(many = True, read_only = True)
     user_profile = User_profile_serializer(many = True,read_only = True )
     review = testimonial_serializer(many= True, read_only = True)
+    barcode_response = diabetes_barcode_serializer(many= True, read_only = True)
     class Meta:
         model = User
-        fields = ['name', 'email', 'password', 'confirm_password', 'otp','botresponse','user_profile','review']
+        fields = [
+            'name', 
+            'email',
+            'password', 
+            'confirm_password', 
+            'otp',
+            'botresponse',
+            'user_profile',
+            'review', 
+            'barcode_response'
+            ]
         extra_kwargs = {
             'password': {'write_only': True},
         }
