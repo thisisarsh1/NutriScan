@@ -7,6 +7,7 @@ import { cn } from "@/app/libs/utils";
 
 
 import {useEmailContext} from '@/app/context/Userinfo'
+import {usePassContext} from '@/app/context/Userinfo'
 import {
   IconBrandGithub,
   IconBrandGoogle,
@@ -17,6 +18,7 @@ import Link from "next/link";
 
 export function Signup() {
   const { contextEmail, setContextEmail } = useEmailContext();
+  const {contextPass, setContextPass}= usePassContext();
   const { toast } = useToast();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -69,6 +71,7 @@ export function Signup() {
         });
         console.log(result?.message);
         setContextEmail(email);
+        setContextPass(confirm_password);
         changetoOTP();
       }
     } catch (error) {
