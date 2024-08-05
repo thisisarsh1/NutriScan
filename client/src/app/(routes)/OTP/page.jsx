@@ -15,9 +15,10 @@ import {
 function page() {
   const router = useRouter();
   const {contextPass, setContextPass}= usePassContext();
-
-  const Autologin=async(e)=>{
-      e.preventDefault();
+const password =contextPass;
+  const Autologin=async()=>{
+    console.log("2")
+      
       const response = await fetch('http://127.0.0.1:8000/api/login', {
       method: 'POST',
       headers: {
@@ -37,6 +38,7 @@ function page() {
     
     const result = await response.json();
     if (response.ok) {
+      console.log("hurray")
       toast({
         title: "Successfully registered",
         // description: result?.message,
@@ -69,18 +71,24 @@ function page() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          otp,
           email,
-          
+          otp,
         }),
+        
       })
+     
       if (!response.ok) {
         toast({
           title: "Wrong OTP",
         });
+        
       }
-
-      Autologin()
+      if (response.ok){
+        console.log("1")
+        Autologin();
+        }
+      
+      
     }
   return (
   <form  onSubmit={handleSubmit}>

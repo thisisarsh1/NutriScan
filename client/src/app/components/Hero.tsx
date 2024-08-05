@@ -2,13 +2,20 @@ import React from 'react'
 import { Spotlight } from './ui/Spotlight'
 import { SparklesCore } from "./ui/sparkles";
 import Uploader from './Uploader'
+import {useNameContext} from '@/app/context/Userinfo'
+import { useState } from 'react';
 function Hero() {
-  return (
+  const [contextName, setContextName] = useState('');
+  
+  return (<>
     <div className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
     <Spotlight
       className="-top-10 left-10 sm:left-60 sm:-top-10"
       fill="white"
     />
+  <div className="absolute right-0 top-0 mt-4 mr-8 font-semibold text-lg">
+   {contextName}
+  </div>
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none"></div>
     
     <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto mt-[9vw]">
@@ -37,6 +44,7 @@ function Hero() {
       <Uploader />
     </div>
   </div>
+  </>
   )
 }
 

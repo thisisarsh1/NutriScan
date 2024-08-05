@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/app/components/hooks/use-outside-click";
+import Link from "next/link";
 
 export function Coatches() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -97,15 +98,16 @@ export function Coatches() {
                       {active.description}
                     </motion.p>
                   </div>
-
+                    <Link href={active.ctaLink}>
                   <motion.a
                     layoutId={`button-${active.title}-${id}`}
-                    href={active.ctaLink}
+                    // href={active.ctaLink}
                     target="_blank"
                     className="px-4 py-3 text-sm rounded-full font-bold bg-green-500 text-white"
                   >
                     {active.ctaText}
                   </motion.a>
+                  </Link>
                 </div>
                 <div className="pt-4 relative px-4">
                   <motion.div
@@ -125,7 +127,7 @@ export function Coatches() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-2xl mx-auto w-full gap-4">
+      <ul className="max-w-4xl mx-auto w-full gap-4 pb-[5rem]">
         {cards.map((card, index) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
@@ -210,7 +212,7 @@ const cards = [
       title: "Certified Nutritionist",
       src: "https://images.pexels.com/photos/8845068/pexels-photo-8845068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       ctaText: "Book a Meeting",
-      ctaLink: "https://example.com/jane-smith",
+      ctaLink: "/meeting/Jane",
       content: () => {
         return (
           <p>
@@ -224,7 +226,7 @@ const cards = [
       title: "Health Coach",
       src: "https://images.pexels.com/photos/700446/pexels-photo-700446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", 
       ctaText: "Book a Meeting",
-      ctaLink: "https://example.com/john-doe",
+      ctaLink: "/meeting/John",
       content: () => {
         return (
           <p>
@@ -238,7 +240,7 @@ const cards = [
       title: "Dietitian",
       src: "https://images.pexels.com/photos/16552435/pexels-photo-16552435/free-photo-of-brunette-with-measuring-tape.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", 
       ctaText: "Book a Meeting",
-      ctaLink: "https://example.com/emily-brown",
+      ctaLink: "/meeting/Emily",
       content: () => {
         return (
           <p>
@@ -252,7 +254,7 @@ const cards = [
       title: "Fitness Expert",
       src: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg", 
       ctaText: "Book a Meeting",
-      ctaLink: "https://example.com/michael-lee",
+      ctaLink: "/meeting/Michale",
       content: () => {
         return (
           <p>
