@@ -11,12 +11,10 @@ class ProductAnalysis:
 
     def fetch_data(self):
         url = f"https://world.openfoodfacts.org/api/v0/product/{self.barcode}.json"
-        # print(f"Fetching data from URL: {url}")  # Debug statement
         response = requests.get(url)
 
         if response.status_code == 200:
             self.product_data = response.json()
-            # print("Product data fetched successfully.")  # Debug statement
             self.load_recommended_data()
             self.analyze_product()
         else:
@@ -24,15 +22,14 @@ class ProductAnalysis:
 
     def load_recommended_data(self):
         try:
-            with open('server/disease_algorithm/normal_data.json', 'r') as file:
+            with open('disease_algorithm/normal_data.json', 'r') as file:
                 self.recommended_data = json.load(file)
-            # print("Recommended data loaded successfully.")  # Debug statement
         except FileNotFoundError:
             print("Error: File not found.")
         except json.JSONDecodeError:
             print("Error: Failed to decode JSON.")
-        except Exception as e :
-            print(e)
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     def analyze_product(self):
         if 'product' not in self.product_data:
@@ -69,7 +66,6 @@ class ProductAnalysis:
             product_value = product_values.get(nutrient, 'N/A')
             min_value = min_values.get(nutrient, 0)
 
-            # Handle 'unlimited' case for fiber
             if max_value == "unlimited" and nutrient == "fiber":
                 if product_value != 'N/A' and float(product_value) >= float(min_value):
                     self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g or more)")
@@ -94,30 +90,25 @@ class ProductAnalysis:
 
     def show_results(self):
         if self.unhealthy_reasons:
-            print("\nThis product is considered unhealthy due to the following reasons:")
-            for reason in self.unhealthy_reasons:
-                print(f"- {reason}")
+            return "This product is considered unhealthy."
         elif self.healthy_reasons:
-            print("\nThis product is considered healthy based on the provided criteria:")
-            for reason in self.healthy_reasons:
-                print(f"- {reason}")
-        else:
-            print("\nYou can eat this product")
+            return "This product is considered healthy."
+        return "You can eat this product."
 
     def show_reasons(self):
+        reasons = []
         if self.unhealthy_reasons:
-            print("\nUnhealthy Reasons:")
-            for reason in self.unhealthy_reasons:
-                print(f"- {reason}")
-        if self.healthy_reasons:
-            print("\nHealthy Reasons:")
-            for reason in self.healthy_reasons:
-                print(f"- {reason}")
+            reasons.append("Unhealthy Reasons:")
+            reasons.extend([f"- {reason}" for reason in self.unhealthy_reasons])
+        elif self.healthy_reasons:
+            reasons.append("Healthy Reasons:")
+            reasons.extend([f"- {reason}" for reason in self.healthy_reasons])
+        return "\n".join(reasons)
 
-if __name__== '__main__' :
+if __name__ == '__main__':
     # Example usage
     product_barcode = "0737628064502"
     analysis = ProductAnalysis(product_barcode)
     analysis.fetch_data()
-    analysis.show_results()
-    # analysis.show_reasons()
+    print(analysis.show_results())
+    print(analysis.show_reasons())

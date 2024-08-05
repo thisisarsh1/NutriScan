@@ -1,7 +1,0 @@
-  # print(f"Product ID: {product_id}")
-        # print(f"Product Name: {product_name}")
-        # print(f"Fat (per 100g): {fat} g")
-        # print(f"Sugar (per 100g): {sugar} g")
-        # print(f"Protein (per 100g): {protein} g")
-        # print(len(unhealthy_reasons))
-        # print(len(healthy_reasons))

@@ -1,4 +1,7 @@
-from disease3_algorithm import fat
+from diabetes_disease import ProductAnalysis
 
-# Now you can access variables and functions defined in the notebook
-print(fat)  # Replace 'your_variable' with the variable defined in your notebook
+product_barcode = "8901063363809"
+analysis = ProductAnalysis(product_barcode)
+analysis.fetch_data()
+print(analysis.show_results())
+print(analysis.show_reasons())
