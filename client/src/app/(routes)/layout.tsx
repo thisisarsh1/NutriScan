@@ -7,8 +7,8 @@ export default function RootLayout({
   }>) {
     return (
       <main>
-        
-        <MainProvider>
+       
+        <MainProvider> 
         <div className="bg-dot-white/[0.18]">
        
           {children}
