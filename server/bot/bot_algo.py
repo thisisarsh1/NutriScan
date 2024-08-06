@@ -36,7 +36,7 @@ def bot_gemini(user_input, user_id):
         cleaned_string = re.sub(r'[*\n]', '', content)
 
         # Save the response in the database
-        BotResponse.objects.create(question=user_input, bot_response=cleaned_string, user_id=user_id)
+        # BotResponse.objects.create(question=user_input, bot_response=cleaned_string, user_id=user_id)
 
         return cleaned_string
 
