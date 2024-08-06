@@ -1,4 +1,5 @@
 import { MainProvider } from '@/app/context/Userinfo';
+
 export default function RootLayout({
     children,
   }: Readonly<{
@@ -6,6 +7,7 @@ export default function RootLayout({
   }>) {
     return (
       <main>
+        
         <MainProvider>
         <div className="bg-dot-white/[0.18]">
        
