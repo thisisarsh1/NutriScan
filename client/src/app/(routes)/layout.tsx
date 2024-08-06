@@ -1,5 +1,5 @@
 import { MainProvider } from '@/app/context/Userinfo';
-import SocketProvider from "@/app/api/socket/route"
+
 export default function RootLayout({
     children,
   }: Readonly<{
