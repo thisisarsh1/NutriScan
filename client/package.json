@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "node index.js"
+    "server": "nodemon index.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",

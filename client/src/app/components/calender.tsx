@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
@@ -11,9 +10,8 @@ import Time from "@/app/components/time_picker"; // Adjust the import path as ne
 import { cn } from "@/app/libs/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { useEffect } from "react";
+import { toast } from "@/components/ui/use-toast";
 
-import { usePathname } from 'next/navigation'
 import {
   Form,
   FormControl,
@@ -28,21 +26,21 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { toast } from "@/components/ui/use-toast";
-import { useState } from "react";
 
 const FormSchema = z.object({
   appointment: z.date({
-    required_error: "A  date is required to make an appointment.",
+    required_error: "A date is required to make an appointment.",
   }),
 });
 
-export function CalenderComp() {
+interface CalenderCompProps {
+  onSendData: (data: { selectedDate: string | undefined; selectedTime: string }) => void;
+}
 
-  const [selectedDate, setSelectedDate] = useState<string | undefined>(
-    undefined
-  );
-  const [selectedTime, setSelectedTime] = useState<string>("");
+export function CalenderComp({ onSendData }: CalenderCompProps) {
+  const [selectedDate, setSelectedDate] = React.useState<string | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = React.useState<string>("");
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -58,7 +56,9 @@ export function CalenderComp() {
         </pre>
       ),
     });
+    
   }
+
   function handleDateChange(date: Date | undefined) {
     if (date) {
       const formattedDate = format(date, "dd-MM-yyyy");
@@ -68,17 +68,15 @@ export function CalenderComp() {
     }
   }
 
-  useEffect(() => {
-    console.log("Selected date updated:", selectedDate);
-  }, [selectedDate]);
-
   function handleTimeChange(time: string) {
     setSelectedTime(time);
   }
 
-  useEffect(() => {
-    console.log("Selected time updated:", selectedTime);
-  }, [selectedTime]);
+  function sendDataToParent() {
+    const data = { selectedDate, selectedTime };
+    onSendData(data);
+  }
+
   return (
     <Form {...form}>
       <form
@@ -134,7 +132,7 @@ export function CalenderComp() {
         <Time onChange={handleTimeChange} />
 
         <div className="flex items-center justify-center">
-          <Button type="submit" className="p-2 rounded">
+          <Button type="submit" className="p-2 rounded" onClick={sendDataToParent}>
             Submit
           </Button>
         </div>
