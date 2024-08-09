@@ -19,8 +19,8 @@ export function Barcode_input() {
   ];
 
   const [barcode_number,setbarcode_number]=useState('')
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+
     
 
   //   try {
