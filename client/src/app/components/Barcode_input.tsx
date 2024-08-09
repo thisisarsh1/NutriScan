@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Modal,
   ModalBody,
@@ -11,10 +12,52 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 export function Barcode_input() {
+  const { toast } = useToast();
   const images = [
     "https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?w=1800&t=st=1721989047~exp=1721989647~hmac=4166bb8d7d35f15cf0c66d0bbd69a12d91ef4bd425d8c9cae62fc568dc60fe20",
   
   ];
+
+  const [barcode_number,setbarcode_number]=useState('')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+
+  //   try {
+  //     const response = await fetch('http://127.0.0.1:8000/api/user/barcode_response', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+          
+  //         barcode_number
+  //         ,
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       toast({
+  //         title: "This number is invalid !",
+  //       });
+  //     }
+
+  //     const result = await response.json();
+  //     if (response.ok) {
+  //       toast({
+  //         title: "This is response !",
+  //         description: result,
+  //       });
+  // };
+  //   }
+  //   catch (error) {
+  //     toast({
+  //       title: "An error occurred",
+  //     });
+  //     console.error("Error submitting form:", error);
+  //   }
+  console.log(barcode_number)
+  }
   return (
     <div className="  flex items-center justify-center p-2">
       <Modal>
@@ -75,12 +118,14 @@ export function Barcode_input() {
             </div>
           </ModalContent>
           <ModalFooter className="gap-4">
+            
             <input className="w-full  text-sm sm:text-base z-50  dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4  "
-            
+            value={barcode_number}
+            onChange={(e)=>setbarcode_number(e.target.value)}
             placeholder="Enter the Number Here">
-            
+          
             </input>
-            <button className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28">
+            <button className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28" type="submit" onClick={handleSubmit}>
               Submit
             </button>
           </ModalFooter>
