@@ -6,7 +6,7 @@ function page() {
   return (
     <div>
         <Scroll></Scroll>
-        {/* <Coatches></Coatches> */}
+        <Coatches></Coatches>
       
     </div>
   )

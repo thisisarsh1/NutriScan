@@ -15,9 +15,9 @@ const PassContext = createContext({
   contextPass: '',
   setContextPass: () => {}, // Default no-op function
 });
-const LoginContext = createContext({
-  LoggedIncontext: false,
-  setLoggedIncontext: () => {}, // Default no-op function
+const LoginInfoContext = createContext({
+  loginInfo: '',
+  setLoginInfo: () => {}, // Default no-op function
 });
 
 // Create a provider component
@@ -25,22 +25,22 @@ export const MainProvider = ({ children }) => {
   const [contextEmail, setContextEmail] = useState('');
   const [contextName, setContextName] = useState('');
   const [contextPass, setContextPass] = useState('');
-  const [LoggedIncontext, setLoggedIncontext] = useState(false);
+  const [loginInfo, setLoginInfo] = useState('');
 
   return (
     <EmailContext.Provider value={{ contextEmail, setContextEmail }}>
       <NameContext.Provider value={{ contextName, setContextName }}>
         <PassContext.Provider value={{ contextPass, setContextPass }}>
-          <LoginContext.Provider value={{ LoggedIncontext, setLoggedIncontext }}>
+          <LoginInfoContext.Provider value={{ loginInfo, setLoginInfo }}>
             {children}
-          </LoginContext.Provider>
+          </LoginInfoContext.Provider>
         </PassContext.Provider>
       </NameContext.Provider>
     </EmailContext.Provider>
   );
 };
 
-// Custom hook for easier context usage
+// Custom hooks for easier context usage
 export const useEmailContext = () => {
   const context = useContext(EmailContext);
   if (context === undefined) {
@@ -65,10 +65,10 @@ export const usePassContext = () => {
   return context;
 };
 
-export const useLoggedInContext = () => {
-  const context = useContext(LoginContext);
+export const useLoginInfoContext = () => {
+  const context = useContext(LoginInfoContext);
   if (context === undefined) {
-    throw new Error('useLoggedInContext must be used within a LoginProvider');
+    throw new Error('useLoginInfoContext must be used within a LoginInfoProvider');
   }
   return context;
 };

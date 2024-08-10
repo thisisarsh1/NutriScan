@@ -1,10 +1,16 @@
-import React from 'react';
-import { useLoggedInContext } from '@/app/context/Userinfo';
+import React, { useEffect } from 'react';
+import { useLoginInfoContext } from '@/app/context/Userinfo';
 
 function GetuserInfo() {
-  const { LoggedIncontext, setLoggedIncontext } = useLoggedInContext();
+  const { loginInfo, setLoginInfo } = useLoginInfoContext();
+useEffect(()=>{
+    
 
-  console.log('LoggedIncontext:', LoggedIncontext);
+        console.log('LoggedIncontext:', loginInfo);
+    
+     
+},[loginInfo])
+ 
 
   return (
     <div>

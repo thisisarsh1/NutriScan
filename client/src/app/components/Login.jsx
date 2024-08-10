@@ -9,14 +9,18 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
-import {useLoggedInContext}from "@/app/context/Userinfo"
+
 import { useRouter } from 'next/navigation';
 import {useEmailContext} from '@/app/context/Userinfo'
+
 export function Login() {
+
+
+
 //   const { contextEmail, setContextEmail } = useEmailContext();
 // const[password,setPassword]=useState("")
 // const [email,setemail]=useState("")
-//   const { LoggedIncontext, setLoggedIncontext } = useLoggedInContext();
+
 
 // const { toast } = useToast();
 // if(contextEmail==""){
@@ -30,38 +34,13 @@ export function Login() {
 
 
 
-// const Getuserinfo=async()=>{
-//   try {
-//     const response = await fetch('http://127.0.0.1:8000/api/user');
-
-//     if (!response.ok) {
-//       toast({
-//         title: "Getuser Error",
-//       });
-//     }
-
-//     const result = await response.json();
-//     if (response.ok) {
-//       // toast({
-//       //   title: "Form submitted successfully",
-//       //   description: result?.message,
-//       // });
-//       console.log(result)
-// };
-//   }
-//   catch (error) {
-//     toast({
-//       title: "An error occurred",
-//     });
-//     console.error("Error submitting form:", error);
-//   }
-// }
 
 
+const [ loginInfo, setLoginInfo ] = useState(false);
 const { contextEmail, setContextEmail } = useEmailContext();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { LoggedIncontext, setLoggedIncontext } = useLoggedInContext();
+
   const { toast } = useToast();
   const router = useRouter();
 
@@ -80,8 +59,11 @@ const { contextEmail, setContextEmail } = useEmailContext();
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          
         },
+        credentials: 'include' ,
         body: JSON.stringify({ email, password }),
+        
       });
 
       if (!response.ok) {
@@ -93,12 +75,16 @@ const { contextEmail, setContextEmail } = useEmailContext();
 
       const result = await response.json();
       if (response.ok) {
+       setLoginInfo("true")
         toast({
           title: "Form submitted successfully",
           description: result?.message,
         });
-        setLoggedIncontext(true); // Update context state
-        router.push("/"); // Redirect after login
+        
+
+        
+        
+      
       }
     } catch (error) {
       toast({
@@ -107,6 +93,50 @@ const { contextEmail, setContextEmail } = useEmailContext();
       console.error("Error submitting form:", error);
     }
   };
+
+
+
+  const Getuserinfo = async () => {
+    try {
+      
+  
+      const response = await fetch('http://127.0.0.1:8000/api/user', 
+      {credentials: 'include' }
+      );
+  
+      if (!response.ok) {
+        toast({
+          title: "Getuser Error",
+        });
+        return;
+      }
+  
+      const result = await response.json();
+      if (response.ok) {
+        // toast({
+        //   title: "Form submitted successfully",
+        //   description: result?.message,
+        // });
+        console.log(result);
+        router.push("/");
+      }
+    } catch (error) {
+      toast({
+        title: "An error occurred",
+      });
+      console.error("Error submitting form:", error);
+    }
+  };
+  
+
+
+
+  if(loginInfo=="true"){
+    Getuserinfo()
+    
+  }
+
+  
 
 
   return (
@@ -122,7 +152,7 @@ const { contextEmail, setContextEmail } = useEmailContext();
         
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" value={contextEmail} onChange={(e)=>setEmail(e.target.value)} />
+          <Input id="email" placeholder="projectmayhem@fc.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
         </LabelInputContainer>
 
         <LabelInputContainer className="mb-4">
