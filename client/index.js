@@ -45,6 +45,14 @@ io.on("connection", (socket) => {
     io.to(room).emit("user:join", { name, id: socket.id,room });
    
   });
+socket.on("user:call",({to,offer})=>{
+  io.to(to).emit("incoming:call",{from:socket.id,offer})
+})
+
+socket.on("call:accepted",({to,ans})=>{
+io.to(to).emit("call:accepted",{from:socket.id,ans})
+
+})
 });
 
-console.log('Socket.io server running on port 8000');
+//  (  chrome://webrtc-internals/ ) for viewing stable connection or not
