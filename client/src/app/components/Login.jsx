@@ -1,7 +1,4 @@
 "use client"
-import React, { useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
 import { cn } from "@/app/libs/utils";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -9,9 +6,12 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
+import React, { useState } from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
+import { useEmailContext } from '@/app/context/Userinfo';
 import { useRouter } from 'next/navigation';
-import {useEmailContext} from '@/app/context/Userinfo'
 
 export function Login() {
 
