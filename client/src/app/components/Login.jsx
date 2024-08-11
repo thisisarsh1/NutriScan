@@ -98,9 +98,7 @@ const { contextEmail, setContextEmail } = useEmailContext();
 
   const Getuserinfo = async () => {
     try {
-      
-  
-      const response = await fetch('http://127.0.0.1:8000/api/user', 
+  const response = await fetch('http://127.0.0.1:8000/api/user', 
       {credentials: 'include' }
       );
   
