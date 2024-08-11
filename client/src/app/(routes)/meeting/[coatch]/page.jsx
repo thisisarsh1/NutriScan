@@ -44,31 +44,42 @@ socket.emit("room:join", { name, room });
    const handleJoinRoom = useCallback((data) => {
     console.log(data);
   }, [name, room, socket]);
-    useEffect(()=>{ 
-      if(date!=""&&time!=""){
-         router.push(`/VideoCall/${room}`)
-      }
-     
-      
-      
     
-    },[date,time])
+
+  const JoinMeet=()=>{
+router.push(`/VideoCall/${room}`)
+  }
+         
+   
   
     
  
 
 
   return (
-    <div className="min-h-screen">
-      <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto sm:pt-[15vh] pt-[20vh] ">
-        <p className="text-4xl lg:text-6xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-4 sm:py-8">
-          Book an appointment
-        </p>
-      </div>
-      <div className="flex justify-center">
-        <CalenderComp onSendData={handleSend} />
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto sm:pt-[10vh] pt-[20vh]">
+      <p className="text-4xl lg:text-5xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-2 sm:py-3">
+        Book an appointment
+      </p>
     </div>
+    <div className="flex justify-center w-full">
+      <CalenderComp onSendData={handleSend} />
+    </div>
+    <p className="text-4xl lg:text-4xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-2 sm:py-3">
+        Already have an appointment !
+      </p>
+    <div className="flex justify-center w-full mt-2">
+    
+      <button className="p-[3px] relative mx-auto max-w-4xl" onClick={JoinMeet}>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#525252] to-[#868686] rounded-lg" />
+        <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+          JOIN THE MEETING 
+        </div>
+      </button>
+    </div>
+  </div>
+  
   );
 }
 
