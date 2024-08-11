@@ -62,31 +62,35 @@ class ProductAnalysis:
         max_values = {key: recommended_nutrients[key]['max'] for key in recommended_nutrients}
         min_values = {key: recommended_nutrients[key]['min'] for key in recommended_nutrients}
 
+        def clean_value(value):
+            """Remove non-numeric characters and convert to float if possible."""
+            if isinstance(value, str):
+                value = value.replace('g', '').replace(',', '').strip()
+                try:
+                    return float(value)
+                except ValueError:
+                    return None
+            return value
+
         for nutrient, max_value in max_values.items():
-            product_value = product_values.get(nutrient, 'N/A')
-            min_value = min_values.get(nutrient, 0)
+            product_value = clean_value(product_values.get(nutrient, 'N/A'))
+            min_value = clean_value(min_values.get(nutrient, 0))
 
-            if max_value == "unlimited" and nutrient == "fiber":
-                if product_value != 'N/A' and float(product_value) >= float(min_value):
-                    self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g or more)")
+            if product_value is None:
+                self.unhealthy_reasons.append(f"Unable to process {nutrient} due to missing or invalid value.")
                 continue
 
-            if product_value == 'N/A':
+            if max_value is None or min_value is None:
+                self.unhealthy_reasons.append(f"Unable to process {nutrient} due to missing recommended values.")
                 continue
 
-            try:
-                product_value = float(product_value)
-                max_value = float(max_value)
-                min_value = float(min_value)
+            if product_value > max_value:
+                self.unhealthy_reasons.append(f"{nutrient.capitalize()} exceeds the recommended maximum ({product_value}g > {max_value}g)")
+            elif product_value < min_value:
+                self.unhealthy_reasons.append(f"{nutrient.capitalize()} is below the recommended minimum ({product_value}g < {min_value}g)")
+            else:
+                self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g - {max_value}g)")
 
-                if product_value > max_value:
-                    self.unhealthy_reasons.append(f"{nutrient.capitalize()} exceeds the recommended maximum ({product_value}g > {max_value}g)")
-                elif product_value < min_value:
-                    self.unhealthy_reasons.append(f"{nutrient.capitalize()} is below the recommended minimum ({product_value}g < {min_value}g)")
-                else:
-                    self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g - {max_value}g)")
-            except ValueError:
-                self.unhealthy_reasons.append(f"Unable to compare {nutrient} due to incompatible data format.")
 
     def show_results(self):
         if self.unhealthy_reasons:
