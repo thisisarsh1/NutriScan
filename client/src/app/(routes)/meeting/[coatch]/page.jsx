@@ -4,6 +4,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSocket } from '@/app/context/socket';
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+
+
 function Page() {
   const pathname = usePathname();
   const [room, setRoom] = useState("");
@@ -78,6 +80,7 @@ router.push(`/VideoCall/${room}`)
         </div>
       </button>
     </div>
+
   </div>
   
   );

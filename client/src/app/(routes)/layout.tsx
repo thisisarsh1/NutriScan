@@ -1,19 +1,17 @@
-import { MainProvider } from '@/app/context/Userinfo';
+import { UserProvider } from '@/app/context/Userinfo';
 
 export default function RootLayout({
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>) {
-    return (
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+<UserProvider>
       <main>
-       
-        <MainProvider> 
-        <div className="bg-dot-white/[0.18]">
-       
+      <div className="bg-dot-white/[0.18]">
           {children}
-          </div>
-          </MainProvider>
+        </div>
       </main>
-    );
-  }
+    </UserProvider>
+  );
+}

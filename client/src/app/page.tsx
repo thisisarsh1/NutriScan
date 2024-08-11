@@ -5,7 +5,6 @@ import { Globe } from "./components/Globe";
 import { Input } from "./components/Input";
 import { Movingcards } from "./components/MovingCards";
 import Footer from "./components/Footer";
-import GetuserInfo from "@/app/components/GetuserInfo"
 
 
 export default function Home() {
@@ -28,7 +27,7 @@ export default function Home() {
         <Movingcards></Movingcards>
       </div>
       <Footer></Footer>
-      <GetuserInfo></GetuserInfo>
+      
     </div>
 
   );
