@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import { useEmailContext } from '@/app/context/Userinfo';
 import { cn } from "@/app/libs/utils";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -6,46 +7,21 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
-import React, { useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-import { useEmailContext } from '@/app/context/Userinfo';
-import { useRouter } from 'next/navigation';
-
 export function Login() {
-
-
-
-//   const { contextEmail, setContextEmail } = useEmailContext();
-// const[password,setPassword]=useState("")
-// const [email,setemail]=useState("")
-
-
-// const { toast } = useToast();
-// if(contextEmail==""){
-//   setContextEmail(email);
-// }
-// const router = useRouter();
-
-
-
-
-
-
-
-
-
-const [ loginInfo, setLoginInfo ] = useState(false);
-const { contextEmail, setContextEmail } = useEmailContext();
+  const { contextEmail, setContextEmail } = useEmailContext();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
+  const [loginInfo, setLoginInfo] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
   // Update email context if it's empty
-  React.useEffect(() => {
+  useEffect(() => {
     if (contextEmail === "") {
       setContextEmail(email);
     }
@@ -59,83 +35,78 @@ const { contextEmail, setContextEmail } = useEmailContext();
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          
         },
-        credentials: 'include' ,
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
-        
       });
 
       if (!response.ok) {
         toast({
-          title: "Please fill entire Form",
+          title: "Login failed",
+          description: "Please check your credentials and try again.",
         });
         return;
       }
 
       const result = await response.json();
-      if (response.ok) {
-       setLoginInfo("true")
-        toast({
-          title: "Form submitted successfully",
-          description: result?.message,
-        });
-        
+      // Ensure result.jwt is defined before using it
+      if (result.jwt) {
+        setLoginInfo(true);
+        localStorage.setItem('jwtToken', result.jwt);
+        console.log(result.jwt);
 
-        
-        
-      
+        toast({
+          title: "Login successful",
+          description: "You have successfully logged in.",
+        });
+
+        // Fetch user info after successful login
+        Getuserinfo(result.jwt);
+      } else {
+        toast({
+          title: "Login failed",
+          description: "No JWT token received.",
+        });
       }
     } catch (error) {
       toast({
         title: "An error occurred",
+        description: "Unable to submit the form. Please try again later.",
       });
       console.error("Error submitting form:", error);
     }
   };
 
-
-
-  const Getuserinfo = async () => {
+  const Getuserinfo = async (token) => {
     try {
-  const response = await fetch('http://127.0.0.1:8000/api/user', 
-      {credentials: 'include' }
-      );
-  
+      const response = await fetch('http://127.0.0.1:8000/api/user', {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ${token}',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
       if (!response.ok) {
         toast({
-          title: "Getuser Error",
+          title: "Error fetching user info",
+          description: "Please check your authentication and try again.",
         });
         return;
       }
-  
+
       const result = await response.json();
-      if (response.ok) {
-        // toast({
-        //   title: "Form submitted successfully",
-        //   description: result?.message,
-        // });
-        console.log(result);
-        router.push("/");
-      }
+      console.log(result);
+      router.push("/");
     } catch (error) {
       toast({
         title: "An error occurred",
+        description: "Unable to fetch user info. Please try again later.",
       });
-      console.error("Error submitting form:", error);
+      console.error("Error fetching user info:", error);
     }
   };
-  
-
-
-
-  if(loginInfo=="true"){
-    Getuserinfo()
-    
-  }
-
-  
-
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -147,15 +118,26 @@ const { contextEmail, setContextEmail } = useEmailContext();
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
-        
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <Input
+            id="email"
+            placeholder="projectmayhem@fc.com"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </LabelInputContainer>
 
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+          <Input
+            id="password"
+            placeholder="••••••••"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </LabelInputContainer>
 
         <button
@@ -171,7 +153,10 @@ const { contextEmail, setContextEmail } = useEmailContext();
         <div className="flex flex-col space-y-4">
           <button
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
+            type="button"
+            onClick={() => {
+              // Add your GitHub OAuth handler here
+            }}
           >
             <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
@@ -181,7 +166,10 @@ const { contextEmail, setContextEmail } = useEmailContext();
           </button>
           <button
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
+            type="button"
+            onClick={() => {
+              // Add your Google OAuth handler here
+            }}
           >
             <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
@@ -191,7 +179,10 @@ const { contextEmail, setContextEmail } = useEmailContext();
           </button>
           <button
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
+            type="button"
+            onClick={() => {
+              // Add your OnlyFans OAuth handler here
+            }}
           >
             <IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
