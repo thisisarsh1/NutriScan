@@ -13,7 +13,7 @@ export function Login() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { contextsetIsLoggedIn ,contextisLoggedIn} = useUserContext(); // Updated hook
+  const { contextsetIsLoggedIn,contextsetEmail,contextsetName} = useUserContext(); // Updated hook
   const [loggedin,setLoggedin]=useState()
   const { toast } = useToast();
   const router = useRouter();
@@ -21,14 +21,14 @@ export function Login() {
   // Update email context if it's empty
 
 
-  const Getuserinfo = async (token) => {
-
+  const Getuserinfo = async () => {
+    const token = localStorage.getItem('authToken');
     try {
         const response = await fetch('http://127.0.0.1:8000/api/user', 
         {
             method: 'GET',
             headers: {
-              "Authorization":{token},
+              "Authorization":token,
               'Content-Type': "application/json",
             },
             credentials: 'include',
@@ -42,14 +42,16 @@ export function Login() {
       }
       if (response.ok){
         const result = await response.json();
-      console.log(result);
-      router.push("/");
+
+      contextsetIsLoggedIn(true)
+      contextsetEmail(result.email)
+      contextsetName(result.name)
       }
       
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
-    router.push("/");
+   
   };
 
 
@@ -81,24 +83,11 @@ export function Login() {
         //  router.push("/GetuserInfo")
         toast({
           title: "Form submitted successfully",
-          description: JSON.stringify(result),
-        });
-
-       
-        
-       
-          console.log("Getuserinfo")
-          const timer = setTimeout(() => {
-            
-            Getuserinfo(result.jwt);
-            console.log(result.jwt)
-          }, 2000); // 3 seconds delay
-          return () => clearTimeout(timer);
-        
-       
-          
-       
-      }
+         
+        });           
+        localStorage.setItem('authToken', result.jwt);
+        Getuserinfo()
+  }
     } catch (error) {
       toast({
         title: "An error occurred",

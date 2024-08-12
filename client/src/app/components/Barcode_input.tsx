@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { useUserContext } from '@/app/context/Userinfo';
 import {
   Modal,
   ModalBody,
@@ -12,6 +13,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 export function Barcode_input() {
+  const {contextemail} = useUserContext(); // Updated hook
+
   const { toast } = useToast();
   const images = [
     "https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?w=1800&t=st=1721989047~exp=1721989647~hmac=4166bb8d7d35f15cf0c66d0bbd69a12d91ef4bd425d8c9cae62fc568dc60fe20",
@@ -21,41 +24,45 @@ export function Barcode_input() {
   const [barcode_number,setbarcode_number]=useState('')
   const handleSubmit = async () => {
 
-    
+    const user_email =contextemail;
+    console.log(contextemail)
 
-  //   try {
-  //     const response = await fetch('http://127.0.0.1:8000/api/user/barcode_response', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
+    try {
+      
+      const response = await fetch('http://127.0.0.1:8000/api/user/barcode_response', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           
-  //         barcode_number
-  //         ,
-  //       }),
-  //     });
+          barcode_number,
+          user_email
+          
+        }),
+      });
 
-  //     if (!response.ok) {
-  //       toast({
-  //         title: "This number is invalid !",
-  //       });
-  //     }
+      if (!response.ok) {
+        toast({
+          title: "This number is invalid !",
+        });
+      }
 
-  //     const result = await response.json();
-  //     if (response.ok) {
-  //       toast({
-  //         title: "This is response !",
-  //         description: result,
-  //       });
-  // };
-  //   }
-  //   catch (error) {
-  //     toast({
-  //       title: "An error occurred",
-  //     });
-  //     console.error("Error submitting form:", error);
-  //   }
+      const result = await response.json();
+      if (response.ok) {
+        toast({
+          title: "This is response !",
+          
+        });
+        console.log(result)
+  };
+    }
+    catch (error) {
+      toast({
+        title: "An error occurred",
+      });
+      console.error("Error submitting form:", error);
+    }
   console.log(barcode_number)
   }
   return (
