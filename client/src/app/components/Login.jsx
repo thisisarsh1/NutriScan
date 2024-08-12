@@ -91,6 +91,7 @@ export function Login() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'origin': 'localhost:3000'
         },
         credentials: 'include',
         body: JSON.stringify({ email, password }),
@@ -168,11 +169,13 @@ export function Login() {
 // =======
   const Getuserinfo = async (token) => {
     try {
+      
       const response = await fetch('http://127.0.0.1:8000/api/user', {
         method: 'GET',
         headers: {
           'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
+          'origin': 'localhost:3000'
         },
         credentials: 'include',
       });
