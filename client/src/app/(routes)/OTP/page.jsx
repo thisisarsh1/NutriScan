@@ -8,16 +8,14 @@ import {
     InputOTPSlot,
   } from "@/components/ui/input-otp"
   import { useRouter } from 'next/navigation';
-  import {usePassContext} from '@/app/context/Userinfo'
-  import {NameContext} from '@/app/context/Userinfo'
-
-  import {useEmailContext} from '@/app/context/Userinfo'
+  import {useUserContext} from '@/app/context/Userinfo'
+  
 function page() {
   const router = useRouter();
-  const {contextPass, setContextPass}= usePassContext();
-const password =contextPass;
+  const {contextpassword,contextsetPassword,}= useUserContext();
+const password =contextpassword;
   const Autologin=async()=>{
-    console.log("2")
+    
       
       const response = await fetch('http://127.0.0.1:8000/api/login', {
       method: 'POST',
@@ -38,7 +36,7 @@ const password =contextPass;
     
     const result = await response.json();
     if (response.ok) {
-      console.log("hurray")
+      
       toast({
         title: "Successfully registered",
         // description: result?.message,
@@ -46,8 +44,8 @@ const password =contextPass;
       console.log(result);
       
       changetoHome();
-      setContextPass("");
-      console.log(contextPass)
+      contextsetPassword,("");
+      console.log(contextpassword)
     }
     
     }
@@ -57,8 +55,8 @@ const password =contextPass;
     router.push("/")
   }
     const { toast } = useToast();
-    const { contextEmail, setContextEmail } = useEmailContext();
-    const email = contextEmail;
+    const { contextemail, setContextEmail } = useUserContext();
+    const email = contextemail;
     const handleOtpChange=(e)=>{
       setOtp(e.target.value);
     }
@@ -96,7 +94,7 @@ const password =contextPass;
         
       <div className="p-4 bg-black shadow-md rounded-xl border border-neutral-500 border-dashed w-[30%] h-[50vh] flex  flex-col items-center justify-center">
     <div className='text-neutral-500 font-bold text-xl m-4'>
-        {`The OTP has been sent to  ${contextEmail}  Please enter the OTP below`}
+        {`The OTP has been sent to  ${contextemail}  Please enter the OTP below`}
     </div>
     <div className='flex items-center justify-center my-auto' onChange={handleOtpChange} >
         <InputOTP maxLength={4}  >
