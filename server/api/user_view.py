@@ -10,11 +10,10 @@ from . models import User
 from . authenticationserializer import UserSerializer
 
 
-# @method_decorator(csrf_exempt, name='dispatch')
 class UserView(APIView):
     @csrf_exempt
     def get(self, request):
-        token = request.COOKIES.get('jwt')
+        token = request.headers.get('Authorization')  # Get the token directly
 
         if not token:
             raise AuthenticationFailed('Unauthenticated!')
