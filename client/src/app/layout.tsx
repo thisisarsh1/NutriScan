@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import {SocketProvider}from"@/app/context/socket"
 const inter = Inter({ subsets: ["latin"] });
+import { UserProvider } from '@/app/context/Userinfo';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
+      <UserProvider>
         <Navbar className="top-9" />
         <main>
           <SocketProvider>
@@ -27,6 +29,7 @@ export default function RootLayout({
          </SocketProvider>
         </main>
         <Toaster  /> 
+        </UserProvider>
       </body>
     </html>
   );

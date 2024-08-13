@@ -6,8 +6,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/app/libs/utils";
 
 
-import {useEmailContext} from '@/app/context/Userinfo'
-import {usePassContext} from '@/app/context/Userinfo'
+import {useUserContext} from '@/app/context/Userinfo'
+
 import {
   IconBrandGithub,
   IconBrandGoogle,
@@ -17,8 +17,7 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
 export function Signup() {
-  const { contextEmail, setContextEmail } = useEmailContext();
-  const {contextPass, setContextPass}= usePassContext();
+  const { contextsetEmail,contextsetPassword } = useUserContext();
   const { toast } = useToast();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -70,8 +69,8 @@ export function Signup() {
           description: result?.message,
         });
         console.log(result?.message);
-        setContextEmail(email);
-        setContextPass(confirm_password);
+        contextsetEmail(email);
+        contextsetPassword(confirm_password);
         changetoOTP();
       }
     } catch (error) {

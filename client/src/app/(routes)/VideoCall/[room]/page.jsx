@@ -4,7 +4,8 @@ import { Button } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactPlayer from 'react-player';
 import peer from '@/services/peer'
-
+import { useRouter } from 'next/navigation';
+import { PhoneMissed } from 'lucide-react';
 
 // function page() {
 //   const socket = useSocket();
@@ -149,12 +150,17 @@ function page ()  {
   const[name,setname]=useState("")
   const [done,setdone]=useState(false)
   const[noCall,setNocall]=useState(false)
+  const router = useRouter();
+
   const handleUserJoined = useCallback(({ email, id }) => {
     console.log(`Email ${email} joined room`);
     setRemoteSocketId(id);
     setname(email)
   }, []);
-
+  const handleEndCall=()=>{
+    window.location.reload()
+    
+  }
   const handleCallUser = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -253,96 +259,67 @@ function page ()  {
   ]);
 
   return (
-    // <div>
-      
-    //   <h4>{remoteSocketId ? "Connected" : "No one in room"}</h4>
-    //  {remoteSocketId  &&<button onClick={handleCallUser}>CALL</button>}
-    //   {myStream && (
-    //     <>
-    //      <p className="text-4xl lg:text-5xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-2 sm:py-3">
-    //     YOU
-    //   </p>
-    //       <ReactPlayer
-    //         playing
-            
-    //         height="300px"
-    //         width="500px"
-    //         url={myStream}
-    //       />
-    //     </>
-    //   )}
-    //   {remoteStream && (
-    //     <>  {myStream && <button onClick={sendStreams}>Send Stream</button>}
-      
-    //   <p className="text-4xl lg:text-5xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-2 sm:py-3">
-    //     {name}
-    //   </p>
-    //       <ReactPlayer
-    //         playing
-           
-    //         height="300px"
-    //         width="500px"
-    //         url={remoteStream}
-    //       />
-    //     </>
-        
-    //   )
-    
-    //   }
-    // </div>
-
-
-
+ 
     <div className="relative w-full h-screen flex flex-col items-center justify-center">
-    {/* Centered Text */}
-    <p className="text-center text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-auto z-10">
-      {!done && !noCall && (remoteSocketId ? "You Both are connected !" : "Waiting for other person to Join")}
-    </p>
-  
-    {/* Centered Call Button */}
-    {remoteSocketId && !done && !noCall && (
-      <button className="p-[3px] relative mx-auto max-w-4xl mt-4" onClick={handleCallUser}>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#525252] to-[#868686] rounded-lg" />
-        <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
-          Call
-        </div>
-      </button>
-    )}
-  
-    {/* Centered Join Meeting Button and Remote Stream */}
-    {remoteStream && (
-      <div className='relative w-full h-screen flex flex-col  '>
-        {myStream && !done && (
-          <button className="p-[3px] relative max-w-md " onClick={sendStreams}>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#525252] to-[#868686] rounded-lg" />
-            <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
-              Join Meeting !
-            </div>
-          </button>
-        )}
-  
-        <ReactPlayer
-          playing
-          height="100%"
-          width="100%"
-          url={remoteStream}
-          className="border-2 border-white rounded m"
-        />
+  {/* Centered Text */}
+  <p className="text-center text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-auto z-10">
+    {!done && !noCall && (remoteSocketId ? "You Both are connected !" : "Waiting for other person to Join")}
+  </p>
+
+  {/* Centered Call Button */}
+  {remoteSocketId && !done && !noCall && (
+    <button className="p-[3px] relative mx-auto max-w-4xl mt-4" onClick={handleCallUser}>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#525252] to-[#868686] rounded-lg" />
+      <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+        Call
       </div>
-    )}
-  
-    {/* Positioned My Stream */}
-    {myStream && (
+    </button>
+  )}
+
+  {/* Centered Join Meeting Button and Remote Stream */}
+  {remoteStream && (
+    <div className='relative w-full h-screen flex flex-col'>
+      {myStream && !done && (
+        <button className="p-[3px] relative max-w-md" onClick={sendStreams}>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#525252] to-[#868686] rounded-lg" />
+          <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+            Join Meeting !
+          </div>
+        </button>
+      )}
+
       <ReactPlayer
         playing
-        height="300px"
-        width="400px"
-        url={myStream}
-        className="absolute bottom-4 right-4 border-2 border-white rounded"
+        height="98%"
+        width="98%"
+        url={remoteStream}
+        className="border-2 border-white rounded m"
       />
-    )}
-  </div>
-  
+    </div>
+  )}
+
+  {/* Positioned My Stream */}
+  {myStream && (
+    <ReactPlayer
+      playing
+      height="300px"
+      width="400px"
+      url={myStream}
+      className="absolute bottom-4 right-4 border-2 border-white rounded"
+    />
+  )}
+
+  {/* Positioned End Call Button */}
+  {remoteStream &&done&& (
+    <button className="relative bottom-4 right-4" onClick={handleEndCall}>
+      {/* <div className="absolute inset-0 bg-gradient-to-r from-[#525252] to-[#868686] rounded-lg" /> */}
+      <div className="px-8 text-red-500 bg-white rounded-xl relative group transition duration-200  hover:text-red-800 bg-transparent">
+      <PhoneMissed />
+      </div>
+    </button>
+  )}
+</div>
+
 
   );
 };

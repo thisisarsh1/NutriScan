@@ -75,31 +75,31 @@
 import React, { createContext, useState, useContext } from 'react';
 
 const UserContext = createContext({
-  email: '',
-  name: '',
-  password: '',
-  isLoggedIn: false,
-  setEmail: () => {},
-  setName: () => {},
-  setPassword: () => {},
-  setIsLoggedIn: () => {},
+  contextemail: '',
+  contextname: '',
+  contextpassword: '',
+  contextisLoggedIn: false,
+  contextsetEmail: () => {},
+  contextsetName: () => {},
+  contextsetPassword: () => {},
+  contextsetIsLoggedIn: () => {},
 });
 
 export const UserProvider = ({ children }) => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [contextemail, contextsetEmail] = useState('');
+  const [contextname, contextsetName] = useState('');
+  const [contextpassword, contextsetPassword] = useState('');
+  const [contextisLoggedIn, contextsetIsLoggedIn] = useState(false);
 
   const value = {
-    email,
-    name,
-    password,
-    isLoggedIn,
-    setEmail,
-    setName,
-    setPassword,
-    setIsLoggedIn,
+    contextemail,
+    contextname,
+    contextpassword,
+    contextisLoggedIn,
+    contextsetEmail,
+    contextsetName,
+    contextsetPassword,
+    contextsetIsLoggedIn,
   };
 
   return (

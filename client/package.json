@@ -25,7 +25,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@react-three/drei": "^9.109.2",
     "@react-three/fiber": "^8.16.8",
-    "@tabler/icons-react": "^3.11.0",
+    "@tabler/icons-react": "^3.12.0",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
@@ -46,14 +46,13 @@
     "react": "^18",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
-    "react-dropzone": "^14.2.3",
     "react-element-to-jsx-string": "^15.0.0",
     "react-hook-form": "^7.52.2",
     "react-player": "^2.16.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "styled-components": "^6.1.12",
-    "tailwind-merge": "^2.4.0",
+    "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.167.0",
     "three-globe": "^2.31.1",
@@ -67,6 +66,6 @@
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.5.4"
   }
 }
