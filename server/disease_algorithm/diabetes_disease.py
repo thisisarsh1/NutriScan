@@ -17,7 +17,7 @@ class ProductAnalysis:
 
         if response.status_code == 200:
             self.product_data = response.json()
-            print("API Response:", json.dumps(self.product_data, indent=2))  # Print API response for debugging
+            # print("API Response:", json.dumps(self.product_data, indent=2))  # Print API response for debugging
             self.load_recommended_data()
             self.analyze_product()
         else:
@@ -45,6 +45,8 @@ class ProductAnalysis:
             print("Error: No product data available.")
             return
 
+        product_info = self.product_data['product']
+        self.product_name = product_info.get('product_name', 'Unknown Product')
         nutriments = self.product_data['product'].get('nutriments', {})
         self.product_values = {
             "sugar": nutriments.get('sugars_100g', None),
@@ -101,6 +103,10 @@ class ProductAnalysis:
             except ValueError:
                 self.unhealthy_reasons.append(f"Unable to compare {nutrient} due to incompatible data format.")
 
+    def get_product_name(self):
+        return self.product_name if hasattr(self, 'product_name') else "Unknown Product"
+
+
     def get_sugar(self):
         return self.product_values.get('sugar', None)
 
@@ -145,7 +151,7 @@ class ProductAnalysis:
             return "This product is considered unhealthy."
         elif self.healthy_reasons:
             return "This product is considered healthy."
-        return "You can eat this product."
+        return "Data Not Available"
 
     def show_reasons(self):
         reasons = []
@@ -159,9 +165,10 @@ class ProductAnalysis:
 
 if __name__ == '__main__':
     # Example usage
-    product_barcode = "0737628064502"
+    product_barcode = "3017620422003"
     analysis = ProductAnalysis(product_barcode)
     analysis.fetch_data()
+    print(f"Product Name: {analysis.get_product_name()}")
 
     # Print individual nutrient values using separate functions
     print(f"Sugar: {analysis.get_sugar()}")
