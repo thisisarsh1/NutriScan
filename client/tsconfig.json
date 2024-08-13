@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/Uploader.jsx", "src/app/components/Login.jsx", "src/components/ui/calendar.jsx", "src/app/components/time_picker.jsx", "src/app/context/Userinfo.js","next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app/components/Hero.jsx", "src/app/components/Input.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/Uploader.jsx", "src/app/components/Login.jsx", "src/components/ui/calendar.jsx", "src/app/components/time_picker.jsx", "src/app/context/Userinfo.js","next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app/components/Hero.jsx", "src/app/components/Input.jsx", "src/app/(routes)/user-info/page.jsx"],
   "exclude": ["node_modules"]
 }

@@ -1,9 +1,9 @@
 import React from 'react'
-
+import BentoGridDemo from '@/app/components/Bento-grid'
 function page() {
   return (
     <div>
-      dietary-suitability
+      <BentoGridDemo></BentoGridDemo>
     </div>
   )
 }

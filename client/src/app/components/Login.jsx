@@ -47,7 +47,7 @@ export function Login() {
       contextsetEmail(result.email)
       contextsetName(result.name)
       toast({
-        title: "Form submitted successfully",
+        title: "You are Successfully Logged In",
        
       });         
       router.push("/")

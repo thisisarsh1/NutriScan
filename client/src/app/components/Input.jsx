@@ -91,8 +91,8 @@ const user_email =contextemail;
             
           });
           setresult(result.bot_response)
-          console.log(result.bot_response)
-          // Getuserinfo()
+          
+         
     };
       }
       catch (error) {
