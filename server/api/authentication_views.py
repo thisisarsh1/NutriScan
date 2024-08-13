@@ -47,6 +47,7 @@ class LoginView(APIView):
     @csrf_exempt
     def post(self, request):
         email = request.data['email']
+
         password = request.data['password']
 
         user = User.objects.filter(email=email).first()
@@ -74,6 +75,7 @@ class LoginView(APIView):
         }
 
         return response
+
 
 class LogoutView(APIView):
     @csrf_exempt
