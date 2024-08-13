@@ -25,7 +25,7 @@ export function Barcode_input() {
   const handleSubmit = async () => {
 
     const user_email =contextemail;
-    console.log(contextemail)
+ 
 
     try {
       

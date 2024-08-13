@@ -28,40 +28,40 @@ const user_email =contextemail;
 
 
 
-    const Getuserinfo = async () => {
-      const token = localStorage.getItem('authToken');
-      try {
-          const response = await fetch('http://127.0.0.1:8000/api/user', 
-          {
-              method: 'GET',
-              headers: {
-                "Authorization":token,
-                'Content-Type': "application/json",
-              },
-              credentials: 'include',
-            }
+    // const Getuserinfo = async () => {
+    //   const token = localStorage.getItem('authToken');
+    //   try {
+    //       const response = await fetch('http://127.0.0.1:8000/api/user', 
+    //       {
+    //           method: 'GET',
+    //           headers: {
+    //             "Authorization":token,
+    //             'Content-Type': "application/json",
+    //           },
+    //           credentials: 'include',
+    //         }
             
-            );
-        if (!response.ok) {
+    //         );
+    //     if (!response.ok) {
           
-          throw new Error('Failed to fetch user info'); // Handle error properly
+    //       throw new Error('Failed to fetch user info'); // Handle error properly
           
-        }
-        if (response.ok){
-          const result = await response.json();
+    //     }
+    //     if (response.ok){
+    //       const result = await response.json();
   
-            console.log(result.botresponse)
-        }
+    //         console.log(result.botresponse)
+    //     }
         
-      } catch (error) {
-        console.error("Error fetching user info:", error);
-      }
+    //   } catch (error) {
+    //     console.error("Error fetching user info:", error);
+    //   }
      
-    };
+    // };
 
 
 
-    if(contextisLoggedIn){
+    if(contextisLoggedIn==true){
 
       try {
       
@@ -92,7 +92,7 @@ const user_email =contextemail;
           });
           setresult(result.bot_response)
           console.log(result.bot_response)
-          Getuserinfo()
+          // Getuserinfo()
     };
       }
       catch (error) {
@@ -102,9 +102,10 @@ const user_email =contextemail;
         console.error("Error submitting form:", error);
       }
     }
+
     else{
       toast({
-        title: "Please Login first",
+        title: "Please Login first"
       });
     }
     

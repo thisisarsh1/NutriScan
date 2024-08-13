@@ -46,6 +46,11 @@ export function Login() {
       contextsetIsLoggedIn(true)
       contextsetEmail(result.email)
       contextsetName(result.name)
+      toast({
+        title: "Form submitted successfully",
+       
+      });         
+      router.push("/")
       }
       
     } catch (error) {
@@ -78,13 +83,8 @@ export function Login() {
 
       const result = await response.json();
       if (response.ok) {
-         // Consider using a more descriptive state
-         
-        //  router.push("/GetuserInfo")
-        toast({
-          title: "Form submitted successfully",
-         
-        });           
+
+          
         localStorage.setItem('authToken', result.jwt);
         Getuserinfo()
   }
