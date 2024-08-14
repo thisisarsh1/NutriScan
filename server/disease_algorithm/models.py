@@ -7,6 +7,7 @@ class diabetes_barcode(models.Model):
     barcode_number = models.CharField(max_length=255, default='default_value')
     result_data = models.TextField()
     reason_data = models.TextField()
+    unhealthy_data = models.TextField(default=None)
     user = models.ForeignKey(User, on_delete=models.CASCADE , related_name='barcode_response')
     sugar = models.FloatField(null=True, blank=True)
     carbohydrates = models.FloatField(null=True, blank=True)

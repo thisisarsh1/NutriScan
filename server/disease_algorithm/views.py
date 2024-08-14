@@ -34,10 +34,28 @@ class Diabetes_Response_View(APIView):
             analysis.fetch_data()
             result_data = analysis.show_results()
             reason_data = analysis.show_reasons()
-            
+            unhealthy_data= analysis.unhealthy_reasons
+            print(result_data)
             # Get the product values
             product_values = analysis.product_data.get('product', {}).get('nutriments', {})
-            product_values = {k: float(v) if v != 'N/A' else None for k, v in product_values.items()}
+            
+            # Convert product values to floats, handling strings with units like 'g'
+            def convert_value(value):
+                if isinstance(value, str):
+                    # Handle common missing data indicators like '-' or empty strings
+                    if value in ['-', '']:
+                        return None
+                    
+                    # Remove common units like 'g', 'mg', 'kcal', 'kJ', etc.
+                    value = value.replace(',', '.').replace('g', '').replace('mg', '').replace('kcal', '').replace('kJ', '').strip()
+                    
+                    # Convert to float if possible
+                    return float(value) if value else None
+                return value
+
+
+
+            product_values = {k: convert_value(v) for k, v in product_values.items()}
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -47,6 +65,7 @@ class Diabetes_Response_View(APIView):
             barcode_number=barcode_number,
             result_data=result_data,
             reason_data=reason_data,
+            unhealthy_data = unhealthy_data,
             user=user,
             sugar=product_values.get('sugars_100g'),
             carbohydrates=product_values.get('carbohydrates_100g'),
@@ -66,3 +85,4 @@ class Diabetes_Response_View(APIView):
         # Serialize the bot response
         serializer = diabetes_barcode_serializer(final_making_response)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
