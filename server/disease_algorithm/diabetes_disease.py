@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 class ProductAnalysis:
     def __init__(self, barcode):
@@ -11,14 +12,11 @@ class ProductAnalysis:
 
     def fetch_data(self):
         url = f"https://world.openfoodfacts.org/api/v0/product/{self.barcode}.json"
+        print(f"Fetching data from URL: {url}")
         response = requests.get(url)
 
         if response.status_code == 200:
             self.product_data = response.json()
-<<<<<<< HEAD
-            # print("API Response:", json.dumps(self.product_data, indent=2))  # Print API response for debugging
-=======
->>>>>>> b3d08817e518d2129c71a5aa89d68eb324bd85fd
             self.load_recommended_data()
             self.analyze_product()
         else:
@@ -26,8 +24,14 @@ class ProductAnalysis:
 
     def load_recommended_data(self):
         try:
-            with open('disease_algorithm/normal_data.json', 'r') as file:
+            cwd = os.getcwd()
+            print(f"Current Working Directory: {cwd}")
+            filepath = os.path.join(cwd, 'disease_algorithm', 'normal_data.json')
+            print(f"Looking for file at: {filepath}")
+
+            with open(filepath, 'r') as file:
                 self.recommended_data = json.load(file)
+            print("Recommended data loaded successfully.")
         except FileNotFoundError:
             print("Error: File not found.")
         except json.JSONDecodeError:
@@ -43,61 +47,54 @@ class ProductAnalysis:
         product_info = self.product_data['product']
         self.product_name = product_info.get('product_name', 'Unknown Product')
         nutriments = self.product_data['product'].get('nutriments', {})
-        product_values = {
-            "sugar": nutriments.get('sugars_100g', 'N/A'),
-            "carbohydrates": nutriments.get('carbohydrates_100g', 'N/A'),
-            "fiber": nutriments.get('fiber_100g', 'N/A'),
-            "fat": nutriments.get('fat_100g', 'N/A'),
-            "protein": nutriments.get('proteins_100g', 'N/A'),
-            "calories": nutriments.get('energy-kcal_100g', 'N/A'),
-            "cholesterol": nutriments.get('cholesterol_100g', 'N/A'),
-            "saturated_fat": nutriments.get('saturated-fat_100g', 'N/A'),
-            "sodium": nutriments.get('sodium_100g', 'N/A'),
-            "potassium": nutriments.get('potassium_100g', 'N/A'),
-            "vitamin_c": nutriments.get('vitamin-c_100g', 'N/A'),
-            "calcium": nutriments.get('calcium_100g', 'N/A'),
-            "iron": nutriments.get('iron_100g', 'N/A'),
+        self.product_values = {
+            "sugar": nutriments.get('sugars_100g', None),
+            "carbohydrates": nutriments.get('carbohydrates_100g', None),
+            "fiber": nutriments.get('fiber_100g', None),
+            "fat": nutriments.get('fat_100g', None),
+            "protein": nutriments.get('proteins_100g', None),
+            "calories": nutriments.get('energy-kcal_100g', None),
+            "cholesterol": nutriments.get('cholesterol_100g', None),
+            "saturated_fat": nutriments.get('saturated-fat_100g', None),
+            "sodium": nutriments.get('sodium_100g', None),
+            "potassium": nutriments.get('potassium_100g', None),
+            "vitamin_c": nutriments.get('vitamin-c_100g', None),
+            "calcium": nutriments.get('calcium_100g', None),
+            "iron": nutriments.get('iron_100g', None),
         }
+
+        # Remove None values from the product_values dictionary
+        self.product_values = {k: v for k, v in self.product_values.items() if v is not None}
 
         if not self.recommended_data:
             print("Error: No recommended data available.")
             return
 
-        recommended_nutrients = self.recommended_data['diabetes']['recommended_nutrients_per_100g']
+        recommended_nutrients = self.recommended_data.get('diabetes', {}).get('recommended_nutrients_per_100g', {})
+        if not recommended_nutrients:
+            print("Error: No recommended nutrients data available.")
+            return
 
-        max_values = {key: recommended_nutrients[key]['max'] for key in recommended_nutrients}
-        min_values = {key: recommended_nutrients[key]['min'] for key in recommended_nutrients}
-
-        def clean_value(value):
-            """Remove non-numeric characters and convert to float if possible."""
-            if isinstance(value, str):
-                value = value.replace('g', '').replace(',', '').strip()
-                try:
-                    return float(value)
-                except ValueError:
-                    return None
-            return value
+        max_values = {key: recommended_nutrients.get(key, {}).get('max', None) for key in recommended_nutrients}
+        min_values = {key: recommended_nutrients.get(key, {}).get('min', None) for key in recommended_nutrients}
 
         for nutrient, max_value in max_values.items():
-            product_value = clean_value(product_values.get(nutrient, 'N/A'))
-            min_value = clean_value(min_values.get(nutrient, 0))
+            product_value = self.product_values.get(nutrient, None)
+            min_value = min_values.get(nutrient, None)
 
-            if product_value is None:
-                self.unhealthy_reasons.append(f"Unable to process {nutrient} due to missing or invalid value.")
+            if max_value == "unlimited" and nutrient == "fiber":
+                if product_value is not None and product_value >= min_value:
+                    self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g or more)")
                 continue
 
-            if max_value is None or min_value is None:
-                self.unhealthy_reasons.append(f"Unable to process {nutrient} due to missing recommended values.")
-                continue
+            if product_value is None or max_value is None or min_value is None:
+                continue  # Skip adding to unhealthy reasons if any value is None
 
-            if product_value > max_value:
-                self.unhealthy_reasons.append(f"{nutrient.capitalize()} exceeds the recommended maximum ({product_value}g > {max_value}g)")
-            elif product_value < min_value:
-                self.unhealthy_reasons.append(f"{nutrient.capitalize()} is below the recommended minimum ({product_value}g < {min_value}g)")
-            else:
-                self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g - {max_value}g)")
+            try:
+                product_value = float(product_value)
+                max_value = float(max_value)
+                min_value = float(min_value)
 
-<<<<<<< HEAD
                 if product_value > max_value:
                     self.unhealthy_reasons.append(f"{nutrient.capitalize()} exceeds the recommended maximum ({product_value}g > {max_value}g)")
                 elif product_value < min_value:
@@ -106,6 +103,8 @@ class ProductAnalysis:
                     self.healthy_reasons.append(f"{nutrient.capitalize()} is within the recommended range ({min_value}g - {max_value}g)")
             except ValueError:
                 self.unhealthy_reasons.append(f"Unable to compare {nutrient} due to incompatible data format.")
+        print(self.unhealthy_reasons)
+        print(self.healthy_reasons)
 
     def get_product_name(self):
         return self.product_name if hasattr(self, 'product_name') else "Unknown Product"
@@ -149,32 +148,35 @@ class ProductAnalysis:
 
     def get_iron(self):
         return self.product_values.get('iron', None)
-=======
->>>>>>> b3d08817e518d2129c71a5aa89d68eb324bd85fd
 
     def show_results(self):
-        if self.unhealthy_reasons:
+        if len(self.unhealthy_reasons) > len(self.healthy_reasons):
             return "This product is considered unhealthy."
-        elif self.healthy_reasons:
+        elif len(self.healthy_reasons) > len(self.unhealthy_reasons):
             return "This product is considered healthy."
         return "Data Not Available"
 
+
     def show_reasons(self):
         reasons = []
-        if self.unhealthy_reasons:
+        if len(self.unhealthy_reasons) > len(self.healthy_reasons):
             reasons.append("Unhealthy Reasons:")
             reasons.extend([f"- {reason}" for reason in self.unhealthy_reasons])
-        elif self.healthy_reasons:
+        elif len(self.healthy_reasons) > len(self.unhealthy_reasons):
             reasons.append("Healthy Reasons:")
+            reasons.extend([f"- {reason}" for reason in self.healthy_reasons])
+        else:
+            reasons.append("Mixed Results:")
+            reasons.extend([f"- {reason}" for reason in self.unhealthy_reasons])
             reasons.extend([f"- {reason}" for reason in self.healthy_reasons])
         return "\n".join(reasons)
 
+
 if __name__ == '__main__':
     # Example usage
-    product_barcode = "3017620422003"
+    product_barcode = "3029330003533"
     analysis = ProductAnalysis(product_barcode)
     analysis.fetch_data()
-<<<<<<< HEAD
     print(f"Product Name: {analysis.get_product_name()}")
 
     # Print individual nutrient values using separate functions
@@ -192,7 +194,9 @@ if __name__ == '__main__':
     print(f"Calcium: {analysis.get_calcium()}")
     print(f"Iron: {analysis.get_iron()}")
 
-=======
->>>>>>> b3d08817e518d2129c71a5aa89d68eb324bd85fd
     print(analysis.show_results())
     print(analysis.show_reasons())
+    print ("\nBut some things also need to consider here\n")
+    for i in analysis.unhealthy_reasons :
+        print(i)
+    # print(analysis.unhealthy_reasons)
