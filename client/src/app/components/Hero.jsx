@@ -2,7 +2,7 @@
 import React from 'react'
 import { Spotlight } from './ui/Spotlight'
 import { SparklesCore } from "./ui/sparkles";
-import Uploader from './Uploader'
+import Uploader from '@/app/components/Uploader'
 import UserTooltip from '@/app/components/UserTooltip'
 import { useUserContext } from '@/app/context/Userinfo';
 function Hero() {

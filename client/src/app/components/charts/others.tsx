@@ -2,7 +2,7 @@
 
 import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
-
+import { useUserContext } from '@/app/context/Userinfo';
 import {
   Card,
   CardContent,
@@ -17,16 +17,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
 
-]
+
+
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+    content: {
+    label: "content",
     color: "hsl(var(--chart-1))",
   },
 
@@ -36,11 +33,21 @@ const chartConfig = {
 } satisfies ChartConfig
 
  function Others() {
+const {contextnutri} = useUserContext(); // Updated hook
+const saturated_fat=contextnutri?.saturated_fat;
+const sodium=contextnutri?.sodium;
+const sugar=contextnutri?.sugar;
+const chartData = [
+    { month: "s.fat", content: saturated_fat },
+    { month: "sodium", content: sodium},
+    { month: "sugar", content: sugar },
+  
+  ]
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Custom Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Nutrition</CardTitle>
+        <CardDescription>Saturated fats ,Sodium,Sugar</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -62,15 +69,15 @@ const chartConfig = {
               tickFormatter={(value) => value.slice(0, 3)}
               hide
             />
-            <XAxis dataKey="desktop" type="number" hide />
+            <XAxis dataKey="content" type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}
             />
             <Bar
-              dataKey="desktop"
+              dataKey="content"
               layout="vertical"
-              fill="var(--color-desktop)"
+              fill="var(--color-content)"
               radius={4}
             >
               <LabelList
@@ -81,7 +88,7 @@ const chartConfig = {
                 fontSize={12}
               />
               <LabelList
-                dataKey="desktop"
+                dataKey="content"
                 position="right"
                 offset={8}
                 className="fill-foreground"
@@ -92,11 +99,17 @@ const chartConfig = {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        <div className="flex gap-2 font-medium leading-none text-neutral-400 mx-auto">
+          Saturated Fats : {saturated_fat};
+          <br></br>
+          
+          Sodium: {sodium};
+          <br></br>
+
+          Sugar: {sugar}
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+        
         </div>
       </CardFooter>
     </Card>

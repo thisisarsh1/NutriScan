@@ -71,12 +71,16 @@ export function Callories() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+      <div className="flex gap-2 font-medium leading-none text-neutral-400">
+      Callories Completed : {callories_completed};
+          <br></br>
+          
+          Callories Left: {callories_left};
+          <br></br>
+
+          
         </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
+       
       </CardFooter>
     </Card>
   )

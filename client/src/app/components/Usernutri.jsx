@@ -15,7 +15,7 @@ function Usernutri() {
     console.log(files);
   };
   return (
-    <><div className='pt-[15%]'>
+    <><div className='pt-[10%]'>
       {!contextisLoggedIn ? (
         
 
@@ -24,7 +24,7 @@ function Usernutri() {
         <FileUpload onChange={handleFileUpload} />
       </div>
       ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 pt-[10%]'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 '>
           <Macros />
           <Callories />
           <Others />

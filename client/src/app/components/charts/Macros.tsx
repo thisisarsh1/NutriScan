@@ -82,6 +82,18 @@ const chartConfig = {
         <div className="leading-none text-muted-foreground">
           Showing total Macro Nutrients !
         </div>
+        <div className="flex gap-2 font-medium leading-none text-neutral-400">
+        Carbohydrates : {carbohydrates};
+          <br></br>
+          
+          Fats: {fat};
+          <br></br>
+
+          Protein: {protein}
+        </div>
+        <div className="leading-none text-muted-foreground">
+        
+        </div>
       </CardFooter>
     </Card>
   )

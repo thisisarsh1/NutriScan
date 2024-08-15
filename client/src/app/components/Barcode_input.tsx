@@ -3,6 +3,18 @@ import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/app/context/Userinfo";
 import { useRouter } from "next/navigation";
+
+
+import { MultiStepLoader as Loader } from "./ui/multi-step-loader";
+
+
+const loadingStates = [
+  { text: "Decoding Barcode" },
+  { text: "Consulting Nutritionists" },
+  { text: "Fighting Off Junk Food" },
+  { text: "Summoning Food Facts" },
+  { text: "Serving You Healthy Truths" },
+];
 import {
   Modal,
   ModalBody,
@@ -23,11 +35,14 @@ export function Barcode_input() {
   ];
 
   const [barcode_number, setbarcode_number] = useState("");
+  const [loadings, setLoading] = useState(false);
   const handleSubmit = async () => {
+    setLoading(true)
     const user_email = contextemail;
 if(contextisLoggedIn){
 
   try {
+    
     const response = await fetch(
       "http://127.0.0.1:8000/api/user/barcode_response",
       {
@@ -51,6 +66,7 @@ if(contextisLoggedIn){
     const result = await response.json();
     if (response.ok) {
       contextsetnutri(result);
+      setLoading(false)
       toast({
         title: "This is response !",
       });
@@ -77,6 +93,14 @@ if(contextisLoggedIn){
   };
   return (
     <div className="  flex items-center justify-center p-2">
+{
+  loadings == true ?<div className="w-full h-[60vh] flex items-center justify-center">
+  {/* Core Loader Modal */}
+  <Loader loadingStates={loadingStates} loading={loadings} duration={3000} />
+
+</div> :''
+}
+       
       <Modal>
         <ModalTrigger className="bg-black dark:bg-neutral-700 dark:text-white  flex justify-center group/modal-btn">
           <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
