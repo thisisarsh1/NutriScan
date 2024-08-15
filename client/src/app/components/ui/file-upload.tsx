@@ -25,7 +25,7 @@ const secondaryVariant = {
   },
 };
 
-export const FileUpload = ({
+const FileUpload = ({
   onChange,
 }: {
   onChange?: (files: File[]) => void;
@@ -192,3 +192,4 @@ export function GridPattern() {
     </div>
   );
 }
+export default FileUpload

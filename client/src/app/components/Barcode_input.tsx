@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { useUserContext } from '@/app/context/Userinfo';
+import { useUserContext } from "@/app/context/Userinfo";
+import { useRouter } from "next/navigation";
 import {
   Modal,
   ModalBody,
@@ -13,58 +14,67 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 export function Barcode_input() {
-  const {contextemail} = useUserContext(); // Updated hook
+  const router = useRouter();
+  const { contextemail, contextsetnutri, contextnutri,contextisLoggedIn } = useUserContext(); // Updated hook
 
   const { toast } = useToast();
   const images = [
     "https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?w=1800&t=st=1721989047~exp=1721989647~hmac=4166bb8d7d35f15cf0c66d0bbd69a12d91ef4bd425d8c9cae62fc568dc60fe20",
-  
   ];
 
-  const [barcode_number,setbarcode_number]=useState('')
+  const [barcode_number, setbarcode_number] = useState("");
   const handleSubmit = async () => {
+    const user_email = contextemail;
+if(contextisLoggedIn){
 
-    const user_email =contextemail;
- 
-
-    try {
-      
-      const response = await fetch('http://127.0.0.1:8000/api/user/barcode_response', {
-        method: 'POST',
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/user/barcode_response",
+      {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          
           barcode_number,
-          user_email
-          
+          user_email,
         }),
-      });
-
-      if (!response.ok) {
-        toast({
-          title: "This number is invalid !",
-        });
       }
+    );
 
-      const result = await response.json();
-      if (response.ok) {
-        toast({
-          title: "This is response !",
-          
-        });
-        console.log(result)
-  };
-    }
-    catch (error) {
+    if (!response.ok) {
       toast({
-        title: "An error occurred",
+        title: "This number is invalid !",
       });
-      console.error("Error submitting form:", error);
     }
-  console.log(barcode_number)
+
+    const result = await response.json();
+    if (response.ok) {
+      contextsetnutri(result);
+      toast({
+        title: "This is response !",
+      });
+
+     
+      router.push("nutrition-info");
+    }
+  } catch (error) {
+    toast({
+      title: "An error occurred",
+    });
+    console.error("Error submitting form:", error);
   }
+
+
+}
+    else{
+
+      toast({
+        title: "Please Login First",
+      });
+    }
+    
+  };
   return (
     <div className="  flex items-center justify-center p-2">
       <Modal>
@@ -79,7 +89,7 @@ export function Barcode_input() {
         <ModalBody>
           <ModalContent>
             <h4 className="text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-8">
-              Enter Your {" "}
+              Enter Your{" "}
               <span className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 border border-gray-200">
                 Barcode Number
               </span>{" "}
@@ -116,23 +126,24 @@ export function Barcode_input() {
             </div>
             <div className="py-10 flex flex-wrap gap-x-4 gap-y-6 items-start justify-start max-w-sm mx-auto">
               <div className="flex  items-center justify-center">
-               
                 <span className="text-neutral-700 dark:text-neutral-300 text-sm">
                   Just enter the number under your barcode
                 </span>
               </div>
-              
             </div>
           </ModalContent>
           <ModalFooter className="gap-4">
-            
-            <input className="w-full  text-sm sm:text-base z-50  dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4  "
-            value={barcode_number}
-            onChange={(e)=>setbarcode_number(e.target.value)}
-            placeholder="Enter the Number Here">
-          
-            </input>
-            <button className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28" type="submit" onClick={handleSubmit}>
+            <input
+              className="w-full  text-sm sm:text-base z-50  dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4  "
+              value={barcode_number}
+              onChange={(e) => setbarcode_number(e.target.value)}
+              placeholder="Enter the Number Here"
+            ></input>
+            <button
+              className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28"
+              type="submit"
+              onClick={handleSubmit}
+            >
               Submit
             </button>
           </ModalFooter>
@@ -141,5 +152,3 @@ export function Barcode_input() {
     </div>
   );
 }
-
-

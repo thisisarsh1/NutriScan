@@ -1,6 +1,8 @@
 import { cn } from "@/app/libs/utils";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "@/app/components/ui/bento-grid";
+import Callories from '@/app/components/charts/Macros'
+
 import {
     IconClipboardCopy,
     IconFileBroken,
