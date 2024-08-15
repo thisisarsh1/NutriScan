@@ -8,50 +8,57 @@ import { IconBrandGithub, IconBrandGoogle, IconBrandOnlyfans } from "@tabler/ico
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/app/context/Userinfo';
 import Link from "next/link";
+import {
+    InputOTP,
+    InputOTPGroup,
+    InputOTPSeparator,
+    InputOTPSlot,
+  } from "@/components/ui/input-otp"
 
+ function ForgotPass() {
 
-export function Login() {
-
-  const [password, setPassword] = useState("");
+  const [new_password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const { contextsetIsLoggedIn,contextsetEmail,contextsetName} = useUserContext(); // Updated hook
   const [loggedin,setLoggedin]=useState()
   const { toast } = useToast();
   const router = useRouter();
+const [confirm_password,setconfirm_password]=useState('')
+const [otp,setotp]=useState('')
 
   // Update email context if it's empty
 
 
-  const Getuserinfo = async () => {
-    const token = localStorage.getItem('authToken');
+  const handleSubmit = async () => {
+    console.log("setPass")
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/user', 
+        const response = await fetch('http://127.0.0.1:8000/api/password-reset/', 
         {
-            method: 'GET',
+            method: 'POST',
             headers: {
-              "Authorization":token,
+             
               'Content-Type': "application/json",
             },
-            credentials: 'include',
+            body: JSON.stringify({ email,otp,new_password,confirm_password}),
           }
           
           );
       if (!response.ok) {
         
-        throw new Error('Failed to fetch user info'); // Handle error properly
+        throw new Error('Failed to Change Pasword'); // Handle error properly
         
       }
       if (response.ok){
         const result = await response.json();
 
-      contextsetIsLoggedIn(true)
-      contextsetEmail(result.email)
-      contextsetName(result.name)
+    //   contextsetIsLoggedIn(true)
+    //   contextsetEmail(result.email)
+    //   contextsetName(result.name)
       toast({
-        title: "You are Successfully Logged In",
+        title: "Password Changed Successfully",
        
       });         
-      router.push("/")
+    //   router.push("/")
       }
       
     } catch (error) {
@@ -62,22 +69,22 @@ export function Login() {
 
 
 
-  const handleSubmit = async (e) => {
+  const sendOTP = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('http://127.0.0.1:8000/api/password-reset-request/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
-        body: JSON.stringify({ email, password }),
+        
+        body: JSON.stringify({ email }),
       });
 
       if (!response.ok) {
         toast({
-          title: "Wrong Password",
+          title: "No such email exist",
         });
         return;
       }
@@ -85,9 +92,11 @@ export function Login() {
       const result = await response.json();
       if (response.ok) {
 
-          
-        localStorage.setItem('authToken', result.jwt);
-        Getuserinfo()
+        toast({
+            title: "OTP successfully sent on your email ",
+          });
+        // localStorage.setItem('authToken', result.jwt);
+       
   }
     } catch (error) {
       toast({
@@ -107,10 +116,10 @@ export function Login() {
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Login to NutriScan
+        Forgot Password ?
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Welcome back!
+       Make a New One
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
@@ -118,63 +127,54 @@ export function Login() {
           <Label htmlFor="email">Email Address</Label>
           <Input id="email" placeholder="projectmayhem@fc.com" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </LabelInputContainer>
-
+        <button
+          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          onClick={sendOTP}
+        >
+          Send OTP &rarr;
+          <BottomGradient />
+        </button>
+        <br></br>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="OTP">OTP</Label>
+          <div id="otp" placeholder="1234" type="otp" value={otp} onChange={(e) => setotp(e.target.value)} >
+          <InputOTP maxLength={6}  >
+          <InputOTPGroup >
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
+        </div>
+        </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input id="password" placeholder="••••••••" type="password" value={new_password} onChange={(e) => setPassword(e.target.value)} />
+        </LabelInputContainer>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="password">confirm_password</Label>
+          <Input id="confirm_password" placeholder="••••••••" type="password" value={confirm_password} onChange={(e) => setconfirm_password(e.target.value)} />
         </LabelInputContainer>
         <div className="flex flex-col space-y-4">
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
         >
-          Login &rarr;
+          SUBMIT &rarr;
           <BottomGradient />
         </button>
-        <Link href='/ForgotPassword'>
-        <button
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          
-        >
-          Forgot Password &rarr;
-          <BottomGradient />
-        </button>
-        </Link>
+       
         </div>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-        <div className="flex flex-col space-y-4">
-          <button
-            className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="button" // Changed type to "button"
-          >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              GitHub
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="button" // Changed type to "button"
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              Google
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="button" // Changed type to "button"
-          >
-            <IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              OnlyFans
-            </span>
-            <BottomGradient />
-          </button>
-        </div>
+        
       </form>
     </div>
   );
@@ -196,4 +196,4 @@ const LabelInputContainer = ({ children, className }) => {
     </div>
   );
 };
-
+export default ForgotPass

@@ -7,7 +7,7 @@ export default function RootLayout({
   return (
 
       <main>
-      <div className="bg-dot-white/[0.18]">
+      <div className="bg-dot-white/[0.18] min-h-screen">
           {children}
         </div>
       </main>
