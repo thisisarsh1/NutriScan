@@ -1,72 +1,146 @@
 {
+
   "name": "client",
+
   "version": "0.1.0",
+
   "private": true,
+
   "type": "module",
+
   "scripts": {
+
     "dev": "next dev",
+
     "build": "next build",
+
     "start": "next start",
+
     "lint": "next lint",
+
     "server": "nodemon index.js"
+
   },
+
   "dependencies": {
+
     "@emotion/react": "^11.13.0",
+
     "@emotion/styled": "^11.13.0",
+
     "@hookform/resolvers": "^3.9.0",
+
     "@mui/material": "^5.16.6",
+
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+
     "@mui/x-date-pickers": "^7.12.0",
+
     "@radix-ui/react-hover-card": "^1.1.1",
+
     "@radix-ui/react-icons": "^1.3.0",
+
     "@radix-ui/react-label": "^2.1.0",
+
     "@radix-ui/react-popover": "^1.1.1",
+
     "@radix-ui/react-slot": "^1.1.0",
+
     "@radix-ui/react-toast": "^1.2.1",
+
     "@react-three/drei": "^9.109.2",
+
     "@react-three/fiber": "^8.16.8",
+
     "@tabler/icons-react": "^3.12.0",
+
     "@tsparticles/engine": "^3.5.0",
+
     "@tsparticles/react": "^3.0.0",
+
     "@tsparticles/slim": "^3.5.0",
+
     "class-variance-authority": "^0.7.0",
+
     "clsx": "^2.1.1",
+
     "date-fns": "^3.6.0",
+
     "dayjs": "^1.11.12",
-    "framer-motion": "^11.3.24",
+
+    "framer-motion": "^11.3.28",
+
     "input-otp": "^1.2.4",
+
     "lucide": "^0.416.0",
+
     "lucide-react": "^0.416.0",
+
     "mini-svg-data-uri": "^1.4.4",
+
     "next": "14.2.5",
+
     "nodemon": "^3.1.4",
+
     "primeicons": "^7.0.0",
+
     "primereact": "^10.7.0",
+
     "qss": "^3.0.0",
+
     "react": "^18",
+
     "react-day-picker": "^8.10.1",
+
     "react-dom": "^18",
+
     "react-dropzone": "^14.2.3",
+
     "react-element-to-jsx-string": "^15.0.0",
+
     "react-hook-form": "^7.52.2",
+
     "react-player": "^2.16.0",
+
+    "recharts": "^2.12.7",
+
     "socket.io": "^4.7.5",
+
     "socket.io-client": "^4.7.5",
+
     "styled-components": "^6.1.12",
+
     "tailwind-merge": "^2.5.2",
+
     "tailwindcss-animate": "^1.0.7",
+
     "three": "^0.167.0",
+
     "three-globe": "^2.31.1",
+
     "zod": "^3.23.8"
+
   },
+
   "devDependencies": {
+
     "@types/node": "^20",
+
     "@types/react": "^18",
+
     "@types/react-dom": "^18",
+
     "eslint": "^8",
+
     "eslint-config-next": "14.2.5",
+
     "postcss": "^8",
+
     "tailwindcss": "^3.4.1",
+
     "typescript": "^5.5.4"
+
   }
+
 }
+

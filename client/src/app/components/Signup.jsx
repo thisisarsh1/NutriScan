@@ -5,6 +5,14 @@ import { Input } from "./ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/app/libs/utils";
 
+import { MultiStepLoader as Loader } from "./ui/multi-step-loader";
+const loadingStates = [
+  { text: "Gathering Your Info" },
+  { text: "Summoning the OTP Wizards" },
+  { text: "Unlocking the Secret Codes" },
+  { text: "Assembling Your Digital Key" },
+  { text: "Sending OTP Telepathically" },
+];
 
 import {useUserContext} from '@/app/context/Userinfo'
 
@@ -26,6 +34,7 @@ export function Signup() {
   const [confirm_password, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const router = useRouter();
+  const [loadings, setLoading] = useState(false);
 
   useEffect(() => {
     setName(`${firstname} ${lastname}`);
@@ -33,7 +42,7 @@ export function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
     if (password !== confirm_password) {
       toast({
         title: "Password Doesn't Match",
@@ -83,10 +92,18 @@ export function Signup() {
 
   const changetoOTP = () => {
     const timer = setTimeout(() => {
+      setLoading(false)
       router.push('/OTP');
     }, 1000);
   }
   return (
+    <>{
+    loadings == true ?<div className="w-full h-[60vh] flex items-center justify-center">
+    {/* Core Loader Modal */}
+    <Loader loadingStates={loadingStates} loading={loadings} duration={1000} />
+  
+  </div> :''
+  }
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to NutriScan
@@ -203,6 +220,7 @@ export function Signup() {
         </div>
       </form>
     </div>
+    </>
   );
 }
 

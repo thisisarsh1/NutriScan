@@ -1,5 +1,6 @@
 "use client";
 
+
 // import React, { createContext, useState, useContext } from 'react';
 
 // // Create context with default values
@@ -74,15 +75,19 @@
 // };
 import React, { createContext, useState, useContext } from 'react';
 
+// Define the shape of the context value
 const UserContext = createContext({
   contextemail: '',
   contextname: '',
   contextpassword: '',
   contextisLoggedIn: false,
+  contextnutri: '',
+
   contextsetEmail: () => {},
   contextsetName: () => {},
   contextsetPassword: () => {},
   contextsetIsLoggedIn: () => {},
+  contextsetnutri: () => {},
 });
 
 export const UserProvider = ({ children }) => {
@@ -90,16 +95,19 @@ export const UserProvider = ({ children }) => {
   const [contextname, contextsetName] = useState('');
   const [contextpassword, contextsetPassword] = useState('');
   const [contextisLoggedIn, contextsetIsLoggedIn] = useState(false);
+  const [contextnutri, contextsetnutri] = useState('');
 
   const value = {
     contextemail,
     contextname,
     contextpassword,
     contextisLoggedIn,
+    contextnutri,
     contextsetEmail,
     contextsetName,
     contextsetPassword,
     contextsetIsLoggedIn,
+    contextsetnutri,
   };
 
   return (

@@ -58,7 +58,7 @@ const [otp,setotp]=useState('')
         title: "Password Changed Successfully",
        
       });         
-    //   router.push("/")
+      router.push("/Login")
       }
       
     } catch (error) {

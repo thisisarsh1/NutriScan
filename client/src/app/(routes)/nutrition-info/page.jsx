@@ -1,9 +1,13 @@
+
 import React from 'react'
 
+import Usernutri from '@/app/components/Usernutri'
+
 function page() {
+
   return (
     <div>
-      nutrition-info
+      <Usernutri></Usernutri>
     </div>
   )
 }
