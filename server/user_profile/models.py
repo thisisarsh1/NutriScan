@@ -7,4 +7,5 @@ class User_Profile(models.Model):
     disease = models.TextField()
     date_of_birth = models.DateField()
     gender = models.TextField()
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     user = models.ForeignKey(User,related_name='user_profile', on_delete=models.CASCADE)
