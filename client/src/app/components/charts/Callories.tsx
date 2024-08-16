@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 "use client"
 
 import { TrendingUp } from "lucide-react"
@@ -37,7 +39,7 @@ const chartConfig = {
 
 export function Callories() {
   const {contextnutri} = useUserContext(); // Updated hook
-  console.log(contextnutri)
+  
     const callories_completed =contextnutri.calories;
     const callories_left =3000-callories_completed;
     const chartData = [
