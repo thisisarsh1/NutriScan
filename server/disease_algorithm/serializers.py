@@ -2,10 +2,12 @@
 
 from rest_framework import serializers
 from .models import diabetes_barcode
+from bot.serializers import Barcode_Bot_Serializer
 
 class diabetes_barcode_serializer(serializers.ModelSerializer):
     class Meta: 
         model = diabetes_barcode
+        barcode_bot= Barcode_Bot_Serializer(many= True, read_only = True )
         fields = [
             'response_id',
             'barcode_number',
@@ -25,7 +27,8 @@ class diabetes_barcode_serializer(serializers.ModelSerializer):
             'potassium',
             'vitamin_c',
             'calcium',
-            'iron'
+            'iron',
+            'barcode_bot'
         ]
         read_only_fields = [
             'response_id', 
