@@ -59,6 +59,7 @@ if(contextisLoggedIn){
     );
 
     if (!response.ok) {
+      setLoading(false)
       toast({
         title: "This number is invalid !",
       });
@@ -76,6 +77,7 @@ if(contextisLoggedIn){
       router.push("nutrition-info");
     }
   } catch (error) {
+    setLoading(false)
     toast({
       title: "An error occurred",
     });
@@ -85,10 +87,11 @@ if(contextisLoggedIn){
 
 }
     else{
-
+     
       toast({
         title: "Please Login First",
       });
+      setLoading(false)
     }
     
   };
@@ -97,7 +100,7 @@ if(contextisLoggedIn){
 {
   loadings == true ?<div className="w-full h-[60vh] flex items-center justify-center">
   {/* Core Loader Modal */}
-  <Loader loadingStates={loadingStates} loading={loadings} duration={3000} />
+  <Loader loadingStates={loadingStates} loading={loadings} duration={2000} />
 
 </div> :''
 }
