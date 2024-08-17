@@ -10,7 +10,7 @@ import { useUserContext } from '@/app/context/Userinfo';
 import Link from "next/link";
 
 
-export function Login() {
+ export function Login() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
