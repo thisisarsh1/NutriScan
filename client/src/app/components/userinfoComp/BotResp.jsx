@@ -48,7 +48,9 @@ const[info,setinfo]=useState('')
           {info.botresponse ? (
             <div>
               {info.botresponse.map((response, index) => (
+
                 <div key={index} className='text-neutral-400 p-5'>
+
                   <p>{`${response?.question} ?`}</p>
                   <br></br>
                   <p>{response?.bot_response}</p>

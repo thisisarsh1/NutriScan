@@ -4,7 +4,9 @@ import { cn } from "@/app/libs/utils";
 import React, { useEffect, useState } from "react";
 import { BentoGrid, BentoGridItem } from "@/app/components/ui/bento-grid";
 import BotResp from '@/app/components/userinfoComp/BotResp'
+
 import Profile from '@/app/components/userinfoComp/Profile'
+
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from '@/app/context/Userinfo';
 import {
@@ -65,16 +67,20 @@ const[info,setinfo]=useState('')
     );
     const items = [
       {
+
         title: "Bot Responses",
         description: "Questions asked from BOT",
+
         header: <BotResp />,
         className: "md:col-span-2",
         icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
       },
       {
+
         title: `Edit Your Profile ${info.name}`,
         description: info.email,
         header: <Profile/>,
+
         className: "md:col-span-1",
         icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
       },

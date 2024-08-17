@@ -16,6 +16,6 @@ class Barcode_bot(models.Model):
     question = models.CharField(max_length=255, default='default_value')
     bot_response = models.TextField()
     user_barcode = models.ForeignKey(diabetes_barcode, on_delete=models.CASCADE , related_name='barcode_bot')
-    barcode_bot = models.ManyToManyField(BotResponse, related_name='barcode_responses')
+    
     def __str__(self):
         return self.question
