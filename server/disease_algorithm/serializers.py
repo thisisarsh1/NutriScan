@@ -25,7 +25,7 @@ class diabetes_barcode_serializer(serializers.ModelSerializer):
             'saturated_fat',
             'sodium',
             'potassium',
-            'vitamin_c',
+            'vitamin_c',    
             'calcium',
             'iron',
             'barcode_bot'
