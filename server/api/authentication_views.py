@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 import jwt
-from jwt import encode
+# from jwt import encode
 import datetime
 from django.utils import timezone
 from .models import User

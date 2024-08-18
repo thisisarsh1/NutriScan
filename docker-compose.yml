@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: ./server
+    container_name: django_server
+    command: gunicorn your_project_name.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./server:/app
+    ports:
+      - "8000:8000"
+
+  nextjs:
+    build:
+      context: ./client
+    container_name: nextjs_client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - django
+
+# No need for a PostgreSQL service
