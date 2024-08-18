@@ -30,7 +30,7 @@ import UserImage from '@/app/components/UserImageuploader'
   }
  
 
-const user_email =contextemail
+const email =contextemail
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ const user_email =contextemail
           'Content-Type': 'application/json',
         },
 
-        body: JSON.stringify({ Proffesion, disease ,date_of_birth,gender,profile_image,user}),
+        body: JSON.stringify({email,Proffesion, disease ,date_of_birth,gender,profile_image}),
       });
 
       if (!response.ok) {
