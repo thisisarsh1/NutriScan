@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 import jwt
+from jwt.exceptions import ExpiredSignatureError
+
 import datetime
 from . models import User
 from . authenticationserializer import UserSerializer
