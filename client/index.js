@@ -48,7 +48,7 @@
 
 import { Server } from "socket.io";
 
-const io = new Server(8000, {
+const io = new Server(7500, {
   cors: true,
 });
 
