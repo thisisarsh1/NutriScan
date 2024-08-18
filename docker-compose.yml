@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: ./server
+    container_name: django_server
+    command: gunicorn server.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./server:/app
+    ports:
+      - "8000:8000"
+    networks: 
+      - nutri-scan
+
+  nextjs:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"  # For frontend
+      - "8000:8000"  # For backend (adjust if needed)
+    volumes:
+      - ./client:/app  # Adjust if needed
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      - nutri-scan
+
+networks:
+  nutri-scan:
+    driver: bridge
