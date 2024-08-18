@@ -1,23 +1,21 @@
-# Dockerfile for Next.js
+# Use Node.js 20 image
+FROM node:20-alpine
 
-# Use the official Node.js image from the Docker Hub
-FROM node:18
-
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
 # Install dependencies
-COPY package.json package-lock.json /app/
 RUN npm install
 
-# Copy the entire project
-COPY . /app/
+# Copy the rest of the application code
+COPY . .
 
-# Build the Next.js application
-RUN npm run build
-
-# Expose port 3000
+# Expose ports
 EXPOSE 3000
+EXPOSE 8000        
 
-# Start the Next.js server
-CMD ["npm", "start"]
+# Run both commands
+CMD ["sh", "-c", "npm run dev & npm run server"]
