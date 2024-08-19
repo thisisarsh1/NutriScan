@@ -6,7 +6,7 @@ services:
       context: ./client
     ports:
       - "3000:3000"  # For frontend
-      - "5000:5000"  # For backend
+      - "7500:7500"  # For backend
     volumes:
       - ./client:/app
     stdin_open: true
@@ -16,7 +16,7 @@ services:
       - nutri-scan
     command: ["sh", "-c", "npm run server & npm run dev"]
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      test: ["CMD", "curl", "-f", "http://localhost:7500"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,7 +25,7 @@ services:
     build:
       context: ./server
     container_name: django_server
-    command: ["./wait-for-it.sh", "nextjs:5000", "-t", "300", "--", "gunicorn", "server.wsgi:application", "--bind", "0.0.0.0:8000"]
+    command: ["./wait-for-it.sh", "nextjs:7500", "-t", "150", "--", "gunicorn", "server.wsgi:application", "--bind", "0.0.0.0:8000"]
     volumes:
       - ./server:/app
       - ./wait-for-it.sh:/wait-for-it.sh  # Add the wait-for-it script
