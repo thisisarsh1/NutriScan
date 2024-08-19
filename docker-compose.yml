@@ -25,14 +25,15 @@ services:
     build:
       context: ./server
     container_name: django_server
-    command: ["./wait-for-it.sh", "nextjs:7500", "-t", "150", "--", "gunicorn", "server.wsgi:application", "--bind", "0.0.0.0:8000"]
+    command: ["gunicorn", "server.wsgi:application", "--bind", "0.0.0.0:8000"]
     volumes:
       - ./server:/app
-      - ./wait-for-it.sh:/wait-for-it.sh  # Add the wait-for-it script
     ports:
       - "8000:8000"
-    networks: 
+    networks:
       - nutri-scan
+    depends_on:
+      - nextjs
 
 networks:
   nutri-scan:
