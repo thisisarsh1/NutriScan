@@ -17,7 +17,7 @@ import UserImage from '@/app/components/UserImageuploader'
   const [Proffesion, setProfession] = useState("");
   const[date_of_birth,setBirthDay]=useState("")
   const[gender,setGender]=useState("")
-  const[profile_image,setFile]=useState("")
+  const[profile_image,setFile]=useState(null)
   const { contextemail} = useUserContext(); // Updated hook
   const [loggedin,setLoggedin]=useState()
   const { toast } = useToast();
@@ -30,46 +30,54 @@ import UserImage from '@/app/components/UserImageuploader'
   }
  
 
-const user_email =contextemail
+const email =contextemail
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log(profile_image);
 
-    
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/user/user_profile/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+  try {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('Proffesion', Proffesion);
+    formData.append('disease', disease);
+    formData.append('date_of_birth', date_of_birth);
+    formData.append('gender', gender);
 
-        body: JSON.stringify({ Proffesion, disease ,date_of_birth,gender,profile_image,user}),
+    // Append the profile image files if available
+    if (profile_image && profile_image.length > 0) {
+      profile_image.forEach((file) => {
+        formData.append('profile_image', file);
       });
-
-      if (!response.ok) {
-        toast({
-          title: "There Was an error",
-        });
-        return;
-      }
-
-      const result = await response.json();
-      if (response.ok) {
-
-        toast({
-            title: "Submitted Successfully",
-          });
-       
-  }
-    } catch (error) {
-      toast({
-        title: "An error occurred",
-      });
-      console.error("Error submitting form:", error);
     }
 
- 
-  };
+    const response = await fetch('http://127.0.0.1:8000/api/user/user_profile/', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      toast({
+        title: "There Was an error",
+      });
+      return;
+    }
+
+    const result = await response.json();
+    if (response.ok) {
+      toast({
+        title: `Submitted Successfully`,
+      });
+      console.log(result);
+    }
+  } catch (error) {
+    toast({
+      title: "An error occurred",
+    });
+    console.error("Error submitting form:", error);
+  }
+};
+
 
 
   
