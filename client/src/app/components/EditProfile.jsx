@@ -18,12 +18,14 @@ import UserImage from '@/app/components/UserImageuploader'
   const[date_of_birth,setBirthDay]=useState("")
   const[gender,setGender]=useState("")
   const[profile_image,setFile]=useState(null)
-  const { contextemail} = useUserContext(); // Updated hook
+  const { contextemail,contextsetimg} = useUserContext(""); // Updated hook
   const [loggedin,setLoggedin]=useState()
   const { toast } = useToast();
   const router = useRouter();
 
   // Update email context if it's empty
+
+
 
   const handleFilechange =(files)=>{
     setFile(files)
@@ -34,7 +36,7 @@ const email =contextemail
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(profile_image);
+
 
   try {
     const formData = new FormData();
@@ -68,7 +70,9 @@ const handleSubmit = async (e) => {
       toast({
         title: `Submitted Successfully`,
       });
-      console.log(result);
+      console.log(result.profile_image)
+      contextsetimg(result.profile_image);
+      router.push('/EditProfiles')
     }
   } catch (error) {
     toast({
