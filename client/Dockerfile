@@ -15,7 +15,7 @@ COPY . .
 
 # Expose ports
 EXPOSE 3000
-EXPOSE 8000        
+EXPOSE 5000        
 
 # Run both commands
-CMD ["sh", "-c", "npm run dev & npm run server"]
+CMD ["sh", "-c", "npm run server & npm run dev"]
