@@ -14,7 +14,7 @@ import { useUserContext } from '@/app/context/Userinfo';
       name: contextname,
       designation: contextemail,
       image:contextimg,
-      link:""
+      link:"/EditProfiles"
       }
     
   ];

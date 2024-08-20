@@ -4,8 +4,9 @@ import { cn } from "@/app/libs/utils";
 import React, { useEffect, useState } from "react";
 import { BentoGrid, BentoGridItem } from "@/app/components/ui/bento-grid";
 import BotResp from '@/app/components/userinfoComp/BotResp'
+import BarcodeResp from '@/app/components/userinfoComp/BarcodeResp'
 
-import Profile from '@/app/components/userinfoComp/Profile'
+
 
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from '@/app/context/Userinfo';
@@ -17,7 +18,7 @@ import {
   } from "@tabler/icons-react";
    
   export function BentoGridDemo() {
-const { contextisLoggedIn} = useUserContext(); // Updated hook
+const { contextisLoggedIn,contextimg} = useUserContext(); // Updated hook
 const[info,setinfo]=useState('')
     const { toast } = useToast();
 
@@ -46,7 +47,7 @@ const[info,setinfo]=useState('')
        
        
         setinfo(result)
-        console.log(result)
+        
         // router.push("/")
         }
         
@@ -65,6 +66,15 @@ const[info,setinfo]=useState('')
  
       <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl   dark:bg-dot-white/[0.2] bg-dot-black/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black"></div>
     );
+    const Imgs = () => (
+
+    <img src="https://images.pexels.com/photos/4226256/pexels-photo-4226256.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"></img>
+    );
+    const Profile = () => (
+
+      <img src={contextimg} className=" h-52 mx-auto"></img>
+      
+      );
     const items = [
       {
 
@@ -83,19 +93,22 @@ const[info,setinfo]=useState('')
 
         className: "md:col-span-1",
         icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+        link:"/EditProfiles"
       },
       {
-        title: "The Art of Design",
-        description: "Discover the beauty of thoughtful and functional design.",
-        header: <Skeleton />,
+        title: "Book A meeting With a Health Coatch",
+        description: "Get to know more about nutrition and excercise",
+        header: <Imgs />,
         className: "md:col-span-1",
         icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+        link:"/health-guides"
+
       },
       {
-        title: "The Power of Communication",
+        title: "The Barcode Responses !",
         description:
-          "Understand the impact of effective communication in our lives.",
-        header: <Skeleton />,
+          "Nutritional values of Food that You Scanned",
+        header: <BarcodeResp />,
         className: "md:col-span-2",
         icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
       },
@@ -112,6 +125,7 @@ return (
             header={item.header}
             className={item.className}
             icon={item.icon}
+            link ={item.link}
           />
         ))}
       </BentoGrid>

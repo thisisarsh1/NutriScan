@@ -1,11 +1,10 @@
-"use client"
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 
-function BotResp() {
-const[info,setinfo]=useState('')
+function BarcodeResp() {
+const[infos,setinfo]=useState('')
 
-    const Getuserinfo = async () => {
+    const Getuserinfos = async () => {
       const token = localStorage.getItem('authToken');
         try {
             const response = await fetch('http://127.0.0.1:8000/api/user', 
@@ -26,10 +25,7 @@ const[info,setinfo]=useState('')
           }
           if (response.ok){
             const result = await response.json();
-            console.log(result)
-         
-         
-          setinfo(result)
+            setinfo(result)
           
           // router.push("/")
           }
@@ -40,20 +36,23 @@ const[info,setinfo]=useState('')
        
       };
       useEffect(()=>{
-        Getuserinfo()
+        Getuserinfos()
       },[])
      
       return (
         <div>
-          {info.botresponse ? (
+          {infos.barcode_response ? (
             <div>
-              {info.botresponse.map((response, index) => (
+              {infos.barcode_response.map((responses, index) => (
 
                 <div key={index} className='text-neutral-300 p-5'>
-
-                  <p>{`${response?.question} ?`}</p>
+                  <p>{`calories${responses?.calories}`}</p>
+                  <p>{`protien${responses?.protein}`}</p>
+                  <p>{`carbohydrates${responses?.carbohydrates}`}</p>
+                  <p>{`fat${responses?.fat}`}</p>
                   <br></br>
-                  <p>{response?.bot_response}</p>
+                  <p>{responses?.result_data}</p>
+                  <p>{responses?.reason_data}</p>
                   <br></br> <hr></hr>
                   <br></br>
                  
@@ -61,11 +60,11 @@ const[info,setinfo]=useState('')
               ))}
             </div>
           ) : (
-            'No Questions Asked yet'
+            'Nothing Scanned Yet'
           )}
         </div>
       );
       
 }
 
-export default BotResp
+export default BarcodeResp

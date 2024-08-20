@@ -70,7 +70,7 @@ const handleSubmit = async (e) => {
       toast({
         title: `Submitted Successfully`,
       });
-      console.log(result.profile_image)
+   
       contextsetimg(result.profile_image);
       router.push('/EditProfiles')
     }
