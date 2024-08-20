@@ -68,13 +68,14 @@ if(contextisLoggedIn){
     const result = await response.json();
     if (response.ok) {
       contextsetnutri(result);
-      setLoading(false)
+      
       toast({
         title: "This is response !",
       });
 
      
       router.push("nutrition-info");
+      setLoading(false)
     }
   } catch (error) {
     setLoading(false)
