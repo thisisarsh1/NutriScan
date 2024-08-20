@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Spotlight } from './ui/Spotlight'
 import { SparklesCore } from "./ui/sparkles";
 import Uploader from '@/app/components/Uploader'
@@ -7,6 +7,17 @@ import UserTooltip from '@/app/components/UserTooltip'
 import { useUserContext } from '@/app/context/Userinfo';
 function Hero() {
   const { contextisLoggedIn} = useUserContext(); // Updated hook
+  useEffect(() => {
+    // Check if the page has already been reloaded in this session
+    const hasRefreshed = sessionStorage.getItem('hasRefreshed');
+
+    if (!hasRefreshed) {
+      // Set the flag in sessionStorage
+      sessionStorage.setItem('hasRefreshed', 'true');
+      // Reload the page
+      window.location.reload();
+    }
+  }, []);
 
   
   return (<>

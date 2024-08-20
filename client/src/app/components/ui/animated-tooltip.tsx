@@ -81,7 +81,7 @@ export const AnimatedTooltip = ({
             )}
           </AnimatePresence>
           <Link href={item.link}>
-          <Image
+          <img
             onMouseMove={handleMouseMove}
             height={100}
             width={100}
