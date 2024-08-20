@@ -15,7 +15,7 @@ function Hero() {
       className="-top-10 left-10 sm:left-60 sm:-top-10"
       fill="white"
     />
-  <div className="absolute sm:right-10 sm:top-12 mt-4 mr-8 font-semibold text-lg">
+  <div className="absolute sm:right-[8%] sm:top-[8%]  font-semibold text-lg">
    {contextisLoggedIn?<UserTooltip></UserTooltip>:""}
   </div>
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none"></div>
