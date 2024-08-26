@@ -67,6 +67,7 @@ if(contextisLoggedIn){
 
     const result = await response.json();
     if (response.ok) {
+      
       contextsetnutri(result);
       
       toast({
@@ -74,8 +75,12 @@ if(contextisLoggedIn){
       });
 
      
-      router.push("nutrition-info");
-      setLoading(false)
+      
+      setTimeout(()=>{
+        router.push("nutrition-info");
+        setLoading(false)
+      },5000)
+      
     }
   } catch (error) {
     setLoading(false)
@@ -101,7 +106,7 @@ if(contextisLoggedIn){
 {
   loadings == true ?<div className="w-full h-[60vh] flex items-center justify-center">
   {/* Core Loader Modal */}
-  <Loader loadingStates={loadingStates} loading={loadings} duration={2000} />
+  <Loader loadingStates={loadingStates} loading={loadings} duration={1200} />
 
 </div> :''
 }

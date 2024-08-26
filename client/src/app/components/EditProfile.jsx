@@ -72,7 +72,7 @@ const handleSubmit = async (e) => {
       });
    
       contextsetimg(result.profile_image);
-      router.push('/EditProfiles')
+      router.push('/user-info')
     }
   } catch (error) {
     toast({
@@ -90,10 +90,10 @@ const handleSubmit = async (e) => {
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Login to NutriScan
+        Update Your Profile
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Welcome back!
+        
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>

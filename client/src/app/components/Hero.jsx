@@ -5,8 +5,48 @@ import { SparklesCore } from "./ui/sparkles";
 import Uploader from '@/app/components/Uploader'
 import UserTooltip from '@/app/components/UserTooltip'
 import { useUserContext } from '@/app/context/Userinfo';
+import {useUserContext} from '@/app/context/Userinfo'
 function Hero() {
-  const { contextisLoggedIn} = useUserContext(); // Updated hook
+  const { contextisLoggedIn,contextsetIsLoggedIn,contextsetEmail,contextsetName} = useUserContext(); // Updated hook
+  
+  const Getuserinfo = async () => {
+    const token = localStorage.getItem('authToken');
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/user', 
+        {
+            method: 'GET',
+            headers: {
+              "Authorization":token,
+              'Content-Type': "application/json",
+            },
+            credentials: 'include',
+          }
+          
+          );
+      if (!response.ok) {
+        
+        throw new Error('Failed to fetch user info'); // Handle error properly
+        
+      }
+      if (response.ok){
+        const result = await response.json();
+  
+      contextsetIsLoggedIn(true)
+      contextsetEmail(result.email)
+      contextsetName(result.name)
+      toast({
+        title: "Successfully Logged in",
+        // description: result?.message,
+  
+      });
+      }
+      
+
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+   
+  };
   useEffect(() => {
     // Check if the page has already been reloaded in this session
     const hasRefreshed = sessionStorage.getItem('hasRefreshed');
@@ -17,8 +57,9 @@ function Hero() {
       // Reload the page
       window.location.reload();
     }
+    
   }, []);
-
+  Getuserinfo()
   
   return (<>
     <div className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
