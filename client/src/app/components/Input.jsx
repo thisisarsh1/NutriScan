@@ -1,9 +1,9 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
 
+import { useUserContext } from '@/app/context/Userinfo';
 import { useState } from "react";
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
-import { useUserContext } from '@/app/context/Userinfo';
 export function Input() {
   const { toast } = useToast();
   const [question,setquestion]=useState("")
