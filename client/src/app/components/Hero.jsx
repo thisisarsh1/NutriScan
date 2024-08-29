@@ -5,7 +5,7 @@ import { SparklesCore } from "./ui/sparkles";
 import Uploader from '@/app/components/Uploader'
 import UserTooltip from '@/app/components/UserTooltip'
 import { useUserContext } from '@/app/context/Userinfo';
-import {useUserContext} from '@/app/context/Userinfo'
+
 function Hero() {
   const { contextisLoggedIn,contextsetIsLoggedIn,contextsetEmail,contextsetName} = useUserContext(); // Updated hook
   
