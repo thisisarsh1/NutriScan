@@ -48,7 +48,7 @@ export function Signup() {
         title: "Password Doesn't Match",
         description: "Please Enter the same password",
       });
-      return;
+      setLoading(false)
     }
 
     try {
@@ -69,6 +69,7 @@ export function Signup() {
         toast({
           title: "Please fill entire Form",
         });
+        setLoading(false)
       }
 
       const result = await response.json();

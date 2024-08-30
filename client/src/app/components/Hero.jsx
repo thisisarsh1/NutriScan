@@ -63,7 +63,6 @@ function Hero() {
     
   }, []);
   Getuserinfo()
-  
   return (<>
     <div className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
     <Spotlight
