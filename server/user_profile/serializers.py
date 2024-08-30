@@ -7,7 +7,8 @@ class User_profile_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = User_Profile
-        exclude = ['user']  # Exclude the user field from the output
+        # exclude = ['user']  # Exclude the user field from the output
+        fields = '__all__'
 
     def create(self, validated_data):
         user_email = validated_data.pop('email')
