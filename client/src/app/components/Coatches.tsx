@@ -230,7 +230,7 @@ const cards = [
       content: () => {
         return (
           <p>
-            John Doe is a well-respected health coach with expertise in holistic wellness and fitness. He offers personalized coaching sessions to help clients build sustainable habits that improve physical and mental well-being. John's approach combines fitness training with lifestyle coaching for a comprehensive health experience.
+            John Doe is a well-respected health coach with expertise in holistic wellness and fitness. He offers personalized coaching sessions to help clients build sustainable habits that improve physical and mental well-being. Johns approach combines fitness training with lifestyle coaching for a comprehensive health experience.
           </p>
         );
       },
@@ -244,7 +244,7 @@ const cards = [
       content: () => {
         return (
           <p>
-            Dr. Emily Brown is a leading dietitian specializing in dietary management and nutrition therapy. With extensive experience in clinical nutrition, she provides evidence-based dietary guidance to help manage various health conditions. Dr. Brown is committed to improving her clients' quality of life through effective nutrition strategies.
+            Dr. Emily Brown is a leading dietitian specializing in dietary management and nutrition therapy. With extensive experience in clinical nutrition, she provides evidence-based dietary guidance to help manage various health conditions. Dr. Brown is committed to improving her clients quality of life through effective nutrition strategies.
           </p>
         );
       },
@@ -258,7 +258,7 @@ const cards = [
       content: () => {
         return (
           <p>
-            Michael Lee is a fitness expert with a focus on strength training and conditioning. He designs customized workout programs to help individuals reach their fitness goals. Michael's expertise includes functional training, injury prevention, and overall fitness optimization for various age groups and fitness levels.
+            Michael Lee is a fitness expert with a focus on strength training and conditioning. He designs customized workout programs to help individuals reach their fitness goals. Michaels expertise includes functional training, injury prevention, and overall fitness optimization for various age groups and fitness levels.
           </p>
         );
       },
@@ -268,11 +268,11 @@ const cards = [
       title: "Wellness Consultant",
       src: "https://images.pexels.com/photos/1300526/pexels-photo-1300526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       ctaText: "Book a Meeting",
-      ctaLink: "https://example.com/sarah-johnson",
+      ctaLink: "/meeting/Sarah",
       content: () => {
         return (
           <p>
-            Sarah Johnson is a wellness consultant dedicated to enhancing clients' overall well-being. She offers guidance on stress management, work-life balance, and holistic health practices. Sarah's approach integrates mental and physical health strategies to help individuals lead healthier, more fulfilling lives.
+            Sarah Johnson is a wellness consultant dedicated to enhancing clients overall well-being. She offers guidance on stress management, work-life balance, and holistic health practices. Sarahs approach integrates mental and physical health strategies to help individuals lead healthier, more fulfilling lives.
           </p>
         );
       },
