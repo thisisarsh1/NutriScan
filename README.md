@@ -4,8 +4,6 @@
 
 ## How to Obtain API Keys and Credentials
 
-## Getting Started
-
 . **Create a `.env` file:**  
    Before running the project, you need to create a `.env` file in the `server` directory with the following environment variables:
 
