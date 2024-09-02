@@ -7,7 +7,7 @@ import peer from '@/services/peer';
 import { useRouter } from 'next/navigation';
 import { PhoneMissed } from 'lucide-react';
 
-export function page() {
+ function Page() {
   const socket = useSocket();
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   const [myStream, setMyStream] = useState();
@@ -181,4 +181,4 @@ export function page() {
   );
 }
 
-export default page;
+export default Page;
