@@ -1,10 +1,10 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { Spotlight } from './ui/Spotlight'
-import { SparklesCore } from "./ui/sparkles";
-import Uploader from '@/app/components/Uploader'
-import UserTooltip from '@/app/components/UserTooltip'
+import Uploader from '@/app/components/Uploader';
+import UserTooltip from '@/app/components/UserTooltip';
 import { useUserContext } from '@/app/context/Userinfo';
+import { useEffect } from 'react';
+import { Spotlight } from './ui/Spotlight';
+import { SparklesCore } from "./ui/sparkles";
 
 function Hero() {
   const { contextisLoggedIn,contextsetIsLoggedIn,contextsetEmail,contextsetName} = useUserContext(); // Updated hook
@@ -12,7 +12,7 @@ function Hero() {
   const Getuserinfo = async () => {
     const token = localStorage.getItem('authToken');
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/user', 
+        const response = await fetch('https://nutriscan-1ahz.onrender.com/api/user', 
         {
             method: 'GET',
             headers: {

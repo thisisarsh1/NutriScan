@@ -1,15 +1,12 @@
 "use client"
-import React, { useEffect, useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import UserImage from '@/app/components/UserImageuploader';
+import { useUserContext } from '@/app/context/Userinfo';
 import { cn } from "@/app/libs/utils";
 import { useToast } from "@/components/ui/use-toast";
-import { IconBrandGithub, IconBrandGoogle, IconBrandOnlyfans } from "@tabler/icons-react";
 import { useRouter } from 'next/navigation';
-import { useUserContext } from '@/app/context/Userinfo';
-import Link from "next/link";
-import { DatePickerDemo } from "@/app/components/OnlyCalender";
-import UserImage from '@/app/components/UserImageuploader'
+import React, { useState } from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
  function EditProfile() {
 
@@ -53,7 +50,7 @@ const handleSubmit = async (e) => {
       });
     }
 
-    const response = await fetch('http://127.0.0.1:8000/api/user/user_profile/', {
+    const response = await fetch('https://nutriscan-1ahz.onrender.com/api/user/user_profile/', {
       method: 'POST',
       body: formData,
     });

@@ -1,18 +1,17 @@
 //@ts-nocheck
 "use client";
-import { cn } from "@/app/libs/utils";
-import React, { useEffect, useState } from "react";
 import { BentoGrid, BentoGridItem } from "@/app/components/ui/bento-grid";
-import BotResp from "@/app/components/userinfoComp/BotResp";
 import BarcodeResp from "@/app/components/userinfoComp/BarcodeResp";
+import BotResp from "@/app/components/userinfoComp/BotResp";
+import { useEffect, useState } from "react";
 
-import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/app/context/Userinfo";
+import { useToast } from "@/components/ui/use-toast";
 import {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
+    IconClipboardCopy,
+    IconFileBroken,
+    IconSignature,
+    IconTableColumn,
 } from "@tabler/icons-react";
 
 export function BentoGridDemo() {
@@ -23,7 +22,7 @@ export function BentoGridDemo() {
   const Getuserinfo = async () => {
     const token = localStorage.getItem("authToken");
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/user", {
+      const response = await fetch("https://nutriscan-1ahz.onrender.com/api/user", {
         method: "GET",
         headers: {
           Authorization: token,

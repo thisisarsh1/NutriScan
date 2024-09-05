@@ -1,14 +1,14 @@
 "use client"
-import React, { useState } from 'react'
-import { useToast } from "@/components/ui/use-toast";
+import { useUserContext } from '@/app/context/Userinfo';
 import {
     InputOTP,
     InputOTPGroup,
     InputOTPSeparator,
     InputOTPSlot,
-  } from "@/components/ui/input-otp"
-  import { useRouter } from 'next/navigation';
-  import {useUserContext} from '@/app/context/Userinfo'
+} from "@/components/ui/input-otp";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
   
 function Page() {
   const router = useRouter();
@@ -21,7 +21,7 @@ const password =contextpassword;
 const Getuserinfo = async () => {
   const token = localStorage.getItem('authToken');
   try {
-      const response = await fetch('http://127.0.0.1:8000/api/user', 
+      const response = await fetch('https://nutriscan-1ahz.onrender.com/api/user', 
       {
           method: 'GET',
           headers: {
@@ -63,7 +63,7 @@ const Getuserinfo = async () => {
   const Autologin=async()=>{
     
       
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('https://nutriscan-1ahz.onrender.com/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const Getuserinfo = async () => {
     const[otp,setOtp]=useState('')
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        const response = await fetch('http://127.0.0.1:8000/api/register', {
+        const response = await fetch('https://nutriscan-1ahz.onrender.com/api/register', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

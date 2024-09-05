@@ -1,6 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function BotResp() {
 const[info,setinfo]=useState('')
@@ -8,7 +7,7 @@ const[info,setinfo]=useState('')
     const Getuserinfo = async () => {
       const token = localStorage.getItem('authToken');
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/user', 
+            const response = await fetch('https://nutriscan-1ahz.onrender.com/api/user', 
             {
                 method: 'GET',
                 headers: {
