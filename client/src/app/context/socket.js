@@ -10,7 +10,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = (props) => {
-  const socket = useMemo(() => io('http://localhost:7500'), []);
+  const socket = useMemo(() => io('https://nutriscan-1.onrender.com'), []);
   return (
     <SocketContext.Provider value={socket}>
       {props.children}
