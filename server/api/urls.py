@@ -4,7 +4,7 @@ from .views import Food_Testing_Scan_images_views, Food_Testing_Scan_text_views
 from . authentication_views import  RegisterView, LoginView, LogoutView, PasswordResetView, PasswordResetRequestView
 from . user_view import UserView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 router = DefaultRouter()
 router.register('images',Food_Testing_Scan_images_views, basename='food_testing_scan_images')
@@ -24,3 +24,4 @@ urlpatterns = [
     path('password-reset/', PasswordResetView.as_view(), name='password-reset'),
 ]
 
+urlpatterns  += staticfiles_urlpatterns()  

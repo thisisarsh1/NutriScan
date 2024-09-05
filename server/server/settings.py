@@ -24,13 +24,14 @@ ALLOWED_HOSTS = [
     'localhost',
     'nutriscan.onrender.com'
     ]
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://nutriscann.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "https://nutriscann.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
