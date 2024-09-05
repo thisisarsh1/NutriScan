@@ -1,11 +1,20 @@
 //@ts-nocheck
 "use client";
-import React, { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/app/context/Userinfo";
+import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
+import { motion } from "framer-motion";
+import Image from "next/image";
+import {
+    Modal,
+    ModalBody,
+    ModalContent,
+    ModalFooter,
+    ModalTrigger,
+} from "./ui/animated-modal";
 import { MultiStepLoader as Loader } from "./ui/multi-step-loader";
 
 
@@ -16,15 +25,6 @@ const loadingStates = [
   { text: "Summoning Food Facts" },
   { text: "Serving You Healthy Truths" },
 ];
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalTrigger,
-} from "./ui/animated-modal";
-import Image from "next/image";
-import { motion } from "framer-motion";
 
 export function Barcode_input() {
   const router = useRouter();
@@ -45,7 +45,7 @@ if(contextisLoggedIn){
   try {
     
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/barcode_response",
+      "https://nutriscan-1ahz.onrender.com/api/user/barcode_response",
       {
         method: "POST",
         headers: {

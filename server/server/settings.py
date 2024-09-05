@@ -19,14 +19,19 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'nutriscan-1ahz.onrender.com'
+    ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://nutriscann.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "https://nutriscann.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

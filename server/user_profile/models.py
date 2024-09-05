@@ -9,3 +9,4 @@ class User_Profile(models.Model):
     gender = models.TextField()
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     user = models.ForeignKey(User,related_name='user_profile', on_delete=models.CASCADE)
+

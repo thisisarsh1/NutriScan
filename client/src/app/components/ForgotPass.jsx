@@ -1,17 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
 import { cn } from "@/app/libs/utils";
 import { useToast } from "@/components/ui/use-toast";
+import React, { useState } from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 import { useRouter } from "next/navigation";
 
 import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
+    InputOTP,
+    InputOTPGroup,
+    InputOTPSeparator,
+    InputOTPSlot,
 } from "@/components/ui/input-otp";
 
 function ForgotPass() {
@@ -27,7 +27,7 @@ function ForgotPass() {
     console.log("setPass");
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/password-reset/",
+        "https://nutriscan-1ahz.onrender.com/api/password-reset/",
         {
           method: "POST",
           headers: {
@@ -60,7 +60,7 @@ function ForgotPass() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/password-reset-request/",
+        "https://nutriscan-1ahz.onrender.com/api/password-reset-request/",
         {
           method: "POST",
           headers: {

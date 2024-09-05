@@ -31,7 +31,7 @@ const user_email =contextemail;
     // const Getuserinfo = async () => {
     //   const token = localStorage.getItem('authToken');
     //   try {
-    //       const response = await fetch('http://127.0.0.1:8000/api/user', 
+    //       const response = await fetch('https://nutriscan-1ahz.onrender.com/api/user', 
     //       {
     //           method: 'GET',
     //           headers: {
@@ -65,7 +65,7 @@ const user_email =contextemail;
 
       try {
       
-        const response = await fetch('http://127.0.0.1:8000/bot/bot_response/', {
+        const response = await fetch('https://nutriscan-1ahz.onrender.com/bot/bot_response/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

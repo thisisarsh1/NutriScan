@@ -1,13 +1,13 @@
 "use client"
-import React, { useEffect, useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { useUserContext } from '@/app/context/Userinfo';
 import { cn } from "@/app/libs/utils";
 import { useToast } from "@/components/ui/use-toast";
 import { IconBrandGithub, IconBrandGoogle, IconBrandOnlyfans } from "@tabler/icons-react";
-import { useRouter } from 'next/navigation';
-import { useUserContext } from '@/app/context/Userinfo';
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 
  export function Login() {
@@ -25,7 +25,7 @@ import Link from "next/link";
   const Getuserinfo = async () => {
     const token = localStorage.getItem('authToken');
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/user', 
+        const response = await fetch('https://nutriscan-1ahz.onrender.com/api/user', 
         {
             method: 'GET',
             headers: {
@@ -66,7 +66,7 @@ import Link from "next/link";
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('https://nutriscan-1ahz.onrender.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

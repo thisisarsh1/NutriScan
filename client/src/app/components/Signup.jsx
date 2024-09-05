@@ -1,9 +1,8 @@
 "use client"
-import React, { useState, useEffect } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { cn } from "@/app/libs/utils";
+import React, { useEffect, useState } from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 import { MultiStepLoader as Loader } from "./ui/multi-step-loader";
 const loadingStates = [
@@ -14,15 +13,15 @@ const loadingStates = [
   { text: "Sending OTP Telepathically" },
 ];
 
-import {useUserContext} from '@/app/context/Userinfo'
+import { useUserContext } from '@/app/context/Userinfo';
 
 import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
+    IconBrandGithub,
+    IconBrandGoogle,
+    IconBrandOnlyfans,
 } from "@tabler/icons-react";
-import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 export function Signup() {
   const { contextsetEmail,contextsetPassword } = useUserContext();
@@ -52,7 +51,7 @@ export function Signup() {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register', {
+      const response = await fetch('https://nutriscan-1ahz.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
