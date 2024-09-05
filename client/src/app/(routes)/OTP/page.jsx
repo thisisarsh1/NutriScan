@@ -10,7 +10,7 @@ import {
   import { useRouter } from 'next/navigation';
   import {useUserContext} from '@/app/context/Userinfo'
   
-function page() {
+function Page() {
   const router = useRouter();
   const {contextpassword,contextsetPassword,contextsetIsLoggedIn,contextsetEmail,contextsetName}= useUserContext();
 const password =contextpassword;
@@ -178,4 +178,4 @@ const BottomGradient = () => {
       </>
     );
   };
-export default page
+export default Page
