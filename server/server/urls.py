@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/user/',include('user_profile.urls')),
     path('api/user/',include('testimonials.urls')),
     path('api/user/',include('disease_algorithm.urls')),
-    path('videocall',include('videocall.urls')),
+    path('videocall/',include('videocall.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
