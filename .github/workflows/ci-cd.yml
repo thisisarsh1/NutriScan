@@ -46,4 +46,4 @@ jobs:
       env:
         RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
       run: |
-        curl -X POST https://api.render.com/deploy/srv-<your-service-id>
+        curl -X POST https://api.render.com/deploy/srv-crcqm8l2ng1s73d1k59g?key=rWGzVgfc650
