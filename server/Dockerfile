@@ -20,7 +20,7 @@ COPY . /app/
 
 # Set environment variables from the .env file (optional)
 # You may need to handle this differently based on how you manage env variables in Docker
-COPY server/.env /app/server/.env
+# COPY server/.env /app/server/.env
 
 # Run Django migrations and collect static files (if needed)
 RUN python manage.py migrate
