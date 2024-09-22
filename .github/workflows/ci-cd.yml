@@ -33,6 +33,13 @@ jobs:
       with:
         context: ./server
         tags: fareed95/nutriscan-server:latest
+        build-args: |
+          DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }}
+          EMAIL_HOST_USER =${{ secrets.EMAIL_HOST_USER }}
+          EMAIL_HOST_PASSWORD =${{ secrets.EMAIL_HOST_PASSWORD }}
+          GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY}}
+          # Add other secrets as needed
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,5 +52,7 @@ jobs:
     - name: Deploy to Render
       env:
         RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        # Add other secrets as needed
       run: |
         curl -X POST https://api.render.com/deploy/srv-crcqm8l2ng1s73d1k59g?key=rWGzVgfc650
