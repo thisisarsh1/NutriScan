@@ -11,10 +11,10 @@ from rest_framework import status
 from api.models import User
 
 class Diabetes_Response_View(APIView):
-    def get(self, request):
-        bot_responses = diabetes_barcode.objects.all()
-        serializer = diabetes_barcode_serializer(bot_responses, many=True)
-        return Response(serializer.data)
+    # def get(self, request):
+    #     bot_responses = diabetes_barcode.objects.all()
+    #     serializer = diabetes_barcode_serializer(bot_responses, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request):
         barcode_number = request.data.get('barcode_number')

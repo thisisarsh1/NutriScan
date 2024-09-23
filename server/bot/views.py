@@ -10,10 +10,10 @@ from disease_algorithm.models import diabetes_barcode
 from django.shortcuts import get_object_or_404
 
 class BotResponseView(APIView):
-    def get(self, request):
-        bot_responses = BotResponse.objects.all()
-        serializer = BotResponseSerializer(bot_responses, many=True)
-        return Response(serializer.data)
+    # def get(self, request):
+    #     bot_responses = BotResponse.objects.all()
+    #     serializer = BotResponseSerializer(bot_responses, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request):
         question = request.data.get('question')
@@ -37,10 +37,10 @@ class BotResponseView(APIView):
         
 
 class Bot_Barcode_View(APIView):
-    def get(self, request):
-        bot_responses = Barcode_bot.objects.all()
-        serializer = Barcode_Bot_Serializer(bot_responses, many=True)
-        return Response(serializer.data)
+    # def get(self, request):
+    #     bot_responses = Barcode_bot.objects.all()
+    #     serializer = Barcode_Bot_Serializer(bot_responses, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request):
         question = request.data.get('question')
