@@ -104,6 +104,8 @@
 
     "react-player": "^2.16.0",
 
+    "react-webcam": "^7.2.0",
+
     "recharts": "^2.12.7",
 
     "socket.io": "^4.7.5",
