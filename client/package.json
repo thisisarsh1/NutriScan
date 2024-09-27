@@ -70,6 +70,8 @@
 
     "dayjs": "^1.11.12",
 
+    "expo-camera": "^15.0.16",
+
     "framer-motion": "^11.3.28",
 
     "input-otp": "^1.2.4",
