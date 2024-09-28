@@ -72,4 +72,4 @@ Want to receive some valuable health tips and guidance? Connect with our industr
 You can schedule meetings with any of the health guides that you're most comfortable with. Whether you're seeking advice on nutrition, fitness, or overall wellness, our experts are ready to assist you. Simply choose a guide that resonates with your needs, and book a session to receive personalized insights and support tailored to your health journey.
 
 # For Developers 
-Nutriscan is an open-source platform that encourages developers to contribute. If you're interested in getting involved, please read the [develop.md](link-to-develop.md) file for comprehensive guidelines on how to contribute effectively. Your contributions can help enhance the platform and make a meaningful impact in the community!
+Nutriscan is an open-source platform that encourages developers to contribute. If you're interested in getting involved, please read the [DEVELOP.md](./DEVELOP.md) file for comprehensive guidelines on how to contribute effectively. Your contributions can help enhance the platform and make a meaningful impact in the community!
