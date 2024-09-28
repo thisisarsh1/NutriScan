@@ -30,6 +30,8 @@ Our platform also goes a step further by suggesting healthier alternatives that 
 
 ## 🏁 How to use 
 To get started with NutriScan:
+
+
 ![NutriScan Demo](web_pages/page1.png)
 
 ## Requirements
@@ -37,3 +39,13 @@ This is the main page of the NutriScan website. To access the platform's feature
 
 ## To use
 On the landing page, you have two options: either scan the barcode directly or manually enter the barcode for analysis.
+To enter manualy you can enter the barcode number in the given text area
+
+![NutriScan Demo](web_pages/page3.png)
+![NutriScan Demo](web_pages/page4.png)
+
+
+Simply put the barcode there. 
+Now, Suppose if we are using barcode 3017620422003 --> Nutella 
+!Let make a scan 
+
