@@ -23,8 +23,8 @@ Our platform also goes a step further by suggesting healthier alternatives that 
 - **Frontend**:  Next.js
 - **Backend**: Django, Python
 - **AI & Image Recognition**: AI models to analyze product labels and nutritional data
-- **Ml Libraries**: OpenCV2, recognition model 
-- **Devops Technologies**: CI/CD pipeline to check secrets, to automate deploy, Docker, Shell Scriptin g
+- **Ml Libraries**: OpenCV2, Recognition model 
+- **Devops Technologies**: CI/CD pipeline to check secrets, to automate deploy, Docker, Shell Scripting
 - **Database**: PostgreSQL, SQlite 
 - **APIs**: Barcode recognition API, Nutrition API, Open Food Facts
 
