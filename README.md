@@ -23,8 +23,10 @@ Our platform also goes a step further by suggesting healthier alternatives that 
 - **Frontend**:  Next.js
 - **Backend**: Django, Python
 - **AI & Image Recognition**: AI models to analyze product labels and nutritional data
+- **Ml Libraries**: OpenCV2, recognition model 
+- **Devops Technologies**: CI/CD pipeline to check secrets, to automate deploy, Docker, Shell Scriptin g
 - **Database**: PostgreSQL, SQlite 
-- **APIs**: Barcode recognition API, Nutrition API
+- **APIs**: Barcode recognition API, Nutrition API, Open Food Facts
 
 ## 🏁 How to use 
 To get started with NutriScan:
@@ -32,3 +34,6 @@ To get started with NutriScan:
 
 ## Requirements
 This is the main page of the NutriScan website. To access the platform's features, authentication is required. This ensures that your history and personalized data are securely stored for a tailored user experience
+
+## To use
+On the landing page, you have two options: either scan the barcode directly or manually enter the barcode for analysis.
