@@ -49,4 +49,27 @@ Simply put the barcode there.
 Now, Suppose if we are using barcode 3017620422003 --> Nutella
 !Let make a scan
 
-![NutriScan Demo](web_pages/page3.png)
+![NutriScan Demo](web_pages/page5.png)
+![NutriScan Demo](web_pages/page6.png)
+
+## Output 
+![NutriScan Demo](web_pages/page7.png)
+
+
+###
+You can see that This product is considered **unhealthy** due to several reasons mentioned 
+## Using Chatbot 
+![NutriScan Demo](web_pages/page8.png)
+The chatbot is here to guide you through your entire dietary process and provide answers to any product-related questions you might have. Whether you're looking for nutritional details, ingredient information, or even personalized dietary advice, the chatbot can assist you every step of the way. If you need help with meal planning, understanding product labels, or have any specific dietary concerns, feel free to ask. It’s designed to make your health journey smoother by offering tailored support for all your dietary needs.
+
+## Health guides
+
+Want to receive some valuable health tips and guidance? Connect with our industry experts who can provide you with tailored advice and insights. Whether you have questions about nutrition, fitness, or overall wellness, our knowledgeable professionals are here to help you navigate your health journey effectively. Don't hesitate to reach out for personalized support and discover the best practices for maintaining a healthy lifestyle.
+
+![NutriScan Demo](web_pages/page9.png)
+![NutriScan Demo](web_pages/page10.png)
+
+You can schedule meetings with any of the health guides that you're most comfortable with. Whether you're seeking advice on nutrition, fitness, or overall wellness, our experts are ready to assist you. Simply choose a guide that resonates with your needs, and book a session to receive personalized insights and support tailored to your health journey.
+
+# For Developers 
+Nutriscan is an open-source platform that encourages developers to contribute. If you're interested in getting involved, please read the [develop.md](link-to-develop.md) file for comprehensive guidelines on how to contribute effectively. Your contributions can help enhance the platform and make a meaningful impact in the community!
