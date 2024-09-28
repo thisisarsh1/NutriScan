@@ -28,4 +28,7 @@ Our platform also goes a step further by suggesting healthier alternatives that 
 
 ## 🏁 How to use 
 To get started with NutriScan:
+![NutriScan Demo](web_pages/page1.png)
 
+## Requirements
+This is the main page of the NutriScan website. To access the platform's features, authentication is required. This ensures that your history and personalized data are securely stored for a tailored user experience
