@@ -1,123 +1,75 @@
 # NutriScan
 
-**NutriScan** is an AI-powered platform that helps users make informed dietary choices by scanning or uploading images of food and medicine labels. It provides detailed nutritional information, allergen alerts, and dietary suitability based on health conditions. NutriScan also suggests healthier alternatives to promote better dietary habits.
+**NutriScan** is an AI-powered platform that empowers users to make informed and healthier dietary choices by scanning or uploading images of food and medicine labels. It analyzes nutritional content, flags allergens, and assesses dietary suitability based on individual health conditions. Whether you're managing diabetes, heart disease, or other conditions, NutriScan provides the information you need to make better food choices effortlessly. The app even suggests healthier alternatives to promote a balanced diet.
 
-## How to Obtain API Keys and Credentials
+## 🚀 About Our Project
 
-. **Create a `.env` file:**  
-   Before running the project, you need to create a `.env` file in the `server` directory with the following environment variables:
+In today’s fast-paced world, determining whether a food product is suitable for someone with specific health conditions can be difficult. Understanding labels, nutritional values, and ingredient details takes time and expertise. This becomes critical for individuals with diseases like diabetes, where sugar, sodium, or other components must be closely monitored.
 
-  ```bash
-     DJANGO_SECRET_KEY='<your_django_secret_key>'
-     DJANGO_DEBUG=True
-     EMAIL_HOST_USER='<your_email_host_user>'
-     EMAIL_HOST_PASSWORD='<your_email_host_password>'
-     GOOGLE_API_KEY='<your_google_api_key>'
-  ```
+**NutriScan** simplifies this process.
 
-### Django Secret Key
+Just by scanning a barcode, NutriScan analyzes the product and instantly provides detailed nutritional insights such as sugar, fat, protein, and sodium content. The app cross-references this data with the user's health conditions, such as diabetes, hypertension, or allergies, to assess whether the product is safe or poses any health risks.
 
-To generate a new Django secret key, you can use one of the following methods:
+Our platform also goes a step further by suggesting healthier alternatives that better align with the user's dietary requirements, encouraging sustainable and healthy eating habits.
 
-1. **Using an Online Tool:**
-   - Visit a tool like [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/).
-   - Generate a key and copy it.
+## 🎯 Key Features
+- **Barcode & Image Scanning**: Scan barcodes or upload images of food and medicine labels to get instant nutritional breakdowns.
+- **Allergen Alerts**: Receive warnings about common allergens like gluten, dairy, nuts, and more.
+- **Dietary Suitability**: Get insights into whether a product is appropriate for individuals with specific health conditions such as diabetes, high blood pressure, and more.
+- **Healthier Alternatives**: Receive suggestions for healthier product alternatives based on your preferences and health needs.
+- **User-Friendly Interface**: A clean and intuitive interface makes scanning and reviewing product information seamless.
 
-2. **Using Python Code:**
-   - Run the following Python code in your local environment:
+## 🔧 Technologies Used
+- **Frontend**:  Next.js
+- **Backend**: Django, Python
+- **AI & Image Recognition**: AI models to analyze product labels and nutritional data
+- **Ml Libraries**: OpenCV2, Recognition model
+- **Devops Technologies**: CI/CD pipeline to check secrets, to automate deploy, Docker, Shell Scripting
+- **Database**: PostgreSQL, SQlite
+- **APIs**: Barcode recognition API, Nutrition API, Open Food Facts
 
-     ```python
-     from django.core.management.utils import get_random_secret_key
-     print(get_random_secret_key())
-     ```
-
-   - Copy the generated key.
-
-3. **Update Your `.env` File:**
-   - Paste the copied key into your `.env` file as the `DJANGO_SECRET_KEY`:
-
-     ```env
-     DJANGO_SECRET_KEY='<your_generated_secret_key>'
-     ```
-
-This key is used by Django for cryptographic signing and should be kept secure.
-
-### Google API Key
-
-To obtain a Google API Key, follow these steps:
-
-1. **Go to the Google Cloud Console:**
-   - Visit the [Google Cloud Console](https://console.cloud.google.com/).
-
-2. **Create or Select a Project:**
-   - Create a new project or select an existing project from the project dropdown.
-
-3. **Navigate to Credentials:**
-   - Go to **APIs & Services** > **Credentials**.
-
-4. **Create a New API Key:**
-   - Click on **Create Credentials** and select **API Key**.
-   - A new API key will be generated and displayed.
-
-5. **Copy the API Key:**
-   - Copy the generated API key.
-
-6. **Update Your `.env` File:**
-   - Paste the copied key into your `.env` file as `GOOGLE_API_KEY`:
-
-     ```env
-     GOOGLE_API_KEY='<your_generated_api_key>'
-     ```
-
-   - This API key is used to access Google services and should be kept secure.
-
-### Email Host User and Password
-
-To configure email sending through Gmail, follow these steps:
-
-1. **Use Your Gmail Address:**
-   - Set your Gmail address as the `EMAIL_HOST_USER` in your `.env` file.
-
-     ```env
-     EMAIL_HOST_USER='<your_gmail_address>'
-     ```
-
-2. **Set Up 2-Step Verification:**
-   - Go to your [Google Account Security](https://myaccount.google.com/security) settings.
-   - Enable **2-Step Verification** if it is not already set up.
-
-3. **Generate an App Password:**
-   - Navigate to the [App Passwords](https://myaccount.google.com/security) page in your Google Account.
-   - Select **Mail** as the app and **Other** (or the device you are using) as the device.
-   - Click **Generate** to create a new app password.
-
-4. **Copy and Use the App Password:**
-   - Copy the generated app password.
-   - Paste this password into your `.env` file as `EMAIL_HOST_PASSWORD`:
-
-     ```env
-     EMAIL_HOST_PASSWORD='<your_generated_app_password>'
-     ```
-
-   - This password is used to authenticate your email sending and should be kept secure.
+## 🏁 How to use
+To get started with NutriScan:
 
 
+![NutriScan Demo](web_pages/page1.png)
 
-## Getting Started
+## Requirements
+This is the main page of the NutriScan website. To access the platform's features, authentication is required. This ensures that your history and personalized data are securely stored for a tailored user experience
 
-To set up and run NutriScan locally, follow these steps:
+## To use
+On the landing page, you have two options: either scan the barcode directly or manually enter the barcode for analysis.
+To enter manualy you can enter the barcode number in the given text area
 
-### Prerequisites
+![NutriScan Demo](web_pages/page3.png)
+![NutriScan Demo](web_pages/page4.png)
 
-1. **Install Docker Desktop:**  
-   Ensure that Docker Desktop is installed on your system. You can download it [here](https://www.docker.com/products/docker-desktop/).
 
-### Installation
+Simply put the barcode there.
+Now, Suppose if we are using barcode 3017620422003 --> Nutella
+!Let make a scan
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/nutriscan.git](https://github.com/Fareed95/NutriScan.git
-   cd nutriscan
-2. **START THE PROJECT**
-   ```bash
-   docker compose up --build
+![NutriScan Demo](web_pages/page5.png)
+![NutriScan Demo](web_pages/page6.png)
+
+## Output 
+![NutriScan Demo](web_pages/page7.png)
+
+
+###
+You can see that This product is considered **unhealthy** due to several reasons mentioned 
+## Using Chatbot 
+![NutriScan Demo](web_pages/page8.png)
+The chatbot is here to guide you through your entire dietary process and provide answers to any product-related questions you might have. Whether you're looking for nutritional details, ingredient information, or even personalized dietary advice, the chatbot can assist you every step of the way. If you need help with meal planning, understanding product labels, or have any specific dietary concerns, feel free to ask. It’s designed to make your health journey smoother by offering tailored support for all your dietary needs.
+
+## Health guides
+
+Want to receive some valuable health tips and guidance? Connect with our industry experts who can provide you with tailored advice and insights. Whether you have questions about nutrition, fitness, or overall wellness, our knowledgeable professionals are here to help you navigate your health journey effectively. Don't hesitate to reach out for personalized support and discover the best practices for maintaining a healthy lifestyle.
+
+![NutriScan Demo](web_pages/page9.png)
+![NutriScan Demo](web_pages/page10.png)
+
+You can schedule meetings with any of the health guides that you're most comfortable with. Whether you're seeking advice on nutrition, fitness, or overall wellness, our experts are ready to assist you. Simply choose a guide that resonates with your needs, and book a session to receive personalized insights and support tailored to your health journey.
+
+# For Developers 
+Nutriscan is an open-source platform that encourages developers to contribute. If you're interested in getting involved, please read the [DEVELOP.md](./DEVELOP.md) file for comprehensive guidelines on how to contribute effectively. Your contributions can help enhance the platform and make a meaningful impact in the community!
