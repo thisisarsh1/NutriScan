@@ -23,12 +23,12 @@ Our platform also goes a step further by suggesting healthier alternatives that 
 - **Frontend**:  Next.js
 - **Backend**: Django, Python
 - **AI & Image Recognition**: AI models to analyze product labels and nutritional data
-- **Ml Libraries**: OpenCV2, Recognition model 
+- **Ml Libraries**: OpenCV2, Recognition model
 - **Devops Technologies**: CI/CD pipeline to check secrets, to automate deploy, Docker, Shell Scripting
-- **Database**: PostgreSQL, SQlite 
+- **Database**: PostgreSQL, SQlite
 - **APIs**: Barcode recognition API, Nutrition API, Open Food Facts
 
-## 🏁 How to use 
+## 🏁 How to use
 To get started with NutriScan:
 
 
@@ -45,7 +45,8 @@ To enter manualy you can enter the barcode number in the given text area
 ![NutriScan Demo](web_pages/page4.png)
 
 
-Simply put the barcode there. 
-Now, Suppose if we are using barcode 3017620422003 --> Nutella 
-!Let make a scan 
+Simply put the barcode there.
+Now, Suppose if we are using barcode 3017620422003 --> Nutella
+!Let make a scan
 
+![NutriScan Demo](web_pages/page3.png)
