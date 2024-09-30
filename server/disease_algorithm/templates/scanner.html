@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Barcode Scanner</title>
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+            border: 1px solid black;
+        }
+        #output {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: green;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        video {
+            width: 80%;
+            max-width: 600px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.js"></script>
+</head>
+<body>
+    <h1>Live Barcode Scanner</h1>
+    <video id="video" autoplay></video>
+    <div id="output"></div>
+
+    <script>
+        const video = document.getElementById('video');
+        const output = document.getElementById('output');
+
+        // Access the camera
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }) // Use the back camera
+            .then((stream) => {
+                video.srcObject = stream;
+                video.setAttribute('playsinline', true); // Required for iOS Safari
+                video.play();
+                requestAnimationFrame(scanBarcode);
+            })
+            .catch((err) => {
+                console.error("Error accessing camera: ", err);
+            });
+
+        function scanBarcode() {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.height = video.videoHeight;
+                canvas.width = video.videoWidth;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, canvas.width, canvas.height);
+
+                if (code) {
+                    output.textContent = `Detected barcode: ${code.data}`;
+
+                    // You can send the barcode to the server using fetch
+                    fetch('/api/process_barcode/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ barcode: code.data }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    });
+
+                    // Optionally, stop scanning after the first detection
+                    return; // You can comment this line to keep scanning
+                }
+            }
+
+            requestAnimationFrame(scanBarcode);
+        }
+    </script>
+</body>
+</html>

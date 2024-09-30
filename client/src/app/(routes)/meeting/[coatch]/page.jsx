@@ -59,7 +59,7 @@ router.push(`/VideoCall/${room}`)
 
 
   return (
-    <div className=" flex flex-col items-center justify-center ">
+    <div className=" flex flex-col items-center justify-center min-h-[100vh]">
     <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto sm:pt-[10vh] pt-[20vh]">
       <p className="text-4xl lg:text-5xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-600 py-2 sm:py-3">
         Book an appointment
